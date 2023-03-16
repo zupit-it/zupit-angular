@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: fregante/setup-git-user@v1
+      - uses: nrwl/nx-set-shas
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+          node-version: 18
+          registry-url: 'https://npm.pkg.github.com'
+      - run: npm ci --ignore-scripts
+      - name: Version
+        shell: bash
+        run: npx nx affected --target=release --parallel=1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

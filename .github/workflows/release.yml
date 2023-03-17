@@ -7,11 +7,17 @@ on:
 
 jobs:
   release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          token: ${{ secrets.ZUPIT_BOT_TOKEN }}
+      - name: Setup git user
+        run: |
+          git config user.name "ZupitDevs"
+          git config user.email "49716732+ZupitDevs@users.noreply.github.com"
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - uses: actions/setup-node@v3
@@ -20,7 +26,7 @@ jobs:
           node-version: 18
           registry-url: 'https://npm.pkg.github.com'
       - run: npm ci --ignore-scripts
-      - name: Version
+      - name: Release
         shell: bash
         run: npx nx affected --target=release --parallel=1
         env:

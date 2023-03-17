@@ -56,15 +56,22 @@
         }
       }
     },
-    "version": {
+    "release": {
       "executor": "@jscutlery/semver:version",
       "options": {
         "preset": "conventional",
-        "postTargets": ["ng-storage:release", "ng-storage:publish"],
+        "postTargets": ["ng-storage:release:github", "ng-storage:publish"],
         "push": true
       }
     },
-    "deploy": {
+    "release:github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "${tag}",
+        "notes": "${notes}"
+      }
+    },
+    "publish": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {
         "access": "public",

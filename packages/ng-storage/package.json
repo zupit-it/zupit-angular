@@ -1,6 +1,10 @@
 {
   "name": "@zupit-it/ng-storage",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zupit-it/zupit-angular.git"
+  },
   "peerDependencies": {
     "@angular/common": "^15.2.0",
     "@angular/core": "^15.2.0"

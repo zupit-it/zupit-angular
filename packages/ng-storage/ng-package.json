@@ -3,5 +3,6 @@
   "dest": "../../dist/packages/ng-storage",
   "lib": {
     "entryFile": "src/index.ts"
-  }
+  },
+  "assets": ["CHANGELOG.md", "README.md"]
 }

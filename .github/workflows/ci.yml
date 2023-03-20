@@ -6,102 +6,16 @@ on:
       - main
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Set SHAs
-        uses: nrwl/nx-set-shas@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          cache: npm
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci --ignore-scripts
-      - name: Build
-        run: npx nx affected --target=build
+  main:
+    name: Main
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.11.3
+    with:
+      number-of-agents: 3
+      parallel-commands-on-agents: |
+        npx nx affected --target=format --parallel=3 & npx nx affected --target=lint --parallel=3 & npx nx affected --target=build --parallel=3 & npx nx affected --target=test --parallel=3 & npx nx affected --target=e2e --parallel=3
 
-  format:
-    name: Format
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Set SHAs
-        uses: nrwl/nx-set-shas@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          cache: npm
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci --ignore-scripts
-      - name: Format
-        run: npx nx affected --target=format
-
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Set SHAs
-        uses: nrwl/nx-set-shas@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          cache: npm
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci --ignore-scripts
-      - name: Lint
-        run: npx nx affected --target=lint
-
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Set SHAs
-        uses: nrwl/nx-set-shas@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          cache: npm
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci --ignore-scripts
-      - name: Test
-        run: npx nx affected --target=test
-
-  e2e:
-    name: E2E
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Set SHAs
-        uses: nrwl/nx-set-shas@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          cache: npm
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci --ignore-scripts
-      - name: E2E
-        run: npx nx affected --target=e2e
+  agents:
+    name: Agents
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.11.3
+    with:
+      number-of-agents: 3

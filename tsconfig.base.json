@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "ng-auth": ["packages/ng-auth/src/index.ts"],
       "ng-storage": ["packages/ng-storage/src/index.ts"]
     }
   },

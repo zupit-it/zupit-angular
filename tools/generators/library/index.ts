@@ -2,7 +2,8 @@ import {
   Tree,
   formatFiles,
   installPackagesTask,
-  updateJson
+  updateJson,
+  readJson
 } from '@nrwl/devkit'
 import { libraryGenerator } from '@nrwl/angular/generators'
 
@@ -14,15 +15,16 @@ export default async function (tree: Tree, schema: Schema) {
   await libraryGenerator(tree, { name: schema.name, buildable: true })
   await formatFiles(tree)
 
-  updateNgPackage(tree, schema)
-  updateProject(tree, schema)
+  updateLibraryNgPackage(tree, schema)
+  updateLibraryPackage(tree, schema)
+  updateLibraryProject(tree, schema)
 
   return () => {
     installPackagesTask(tree)
   }
 }
 
-function updateNgPackage(tree: Tree, schema: Schema) {
+function updateLibraryNgPackage(tree: Tree, schema: Schema) {
   updateJson(tree, `packages/${schema.name}/ng-package.json`, (ngPackage) => {
     ngPackage.assets = ['CHANGELOG.md', 'README.md']
 
@@ -30,7 +32,20 @@ function updateNgPackage(tree: Tree, schema: Schema) {
   })
 }
 
-function updateProject(tree: Tree, schema: Schema) {
+function updateLibraryPackage(tree: Tree, schema: Schema) {
+  updateJson(tree, `packages/${schema.name}/package.json`, (pkg) => {
+    pkg.name = `@zupit-it/${pkg.name}`
+    pkg.version = `${getAngularMajorVersion(tree)}.0.0`
+    pkg.repository = {
+      type: 'git',
+      url: 'https://github.com/zupit-it/zupit-angular.git'
+    }
+
+    return pkg
+  })
+}
+
+function updateLibraryProject(tree: Tree, schema: Schema) {
   updateJson(tree, `packages/${schema.name}/project.json`, (project) => {
     project.targets = {
       build: project.targets.build,
@@ -76,4 +91,11 @@ function updateProject(tree: Tree, schema: Schema) {
 
     return project
   })
+}
+
+function getAngularMajorVersion(tree: Tree) {
+  const packageJson = readJson(tree, 'package.json')
+  const angularVersion = packageJson.dependencies['@angular/core']
+
+  return angularVersion.split('.')[0].replace(/[~^]/, '')
 }

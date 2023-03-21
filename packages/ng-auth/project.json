@@ -26,7 +26,7 @@
       "options": {
         "commands": [
           {
-            "command": "npx nx format:write --projects ng-auth"
+            "command": "npx nx format:check --projects ng-auth"
           }
         ],
         "parallel": false

@@ -26,7 +26,7 @@
       "options": {
         "commands": [
           {
-            "command": "npx nx format:write --projects ng-storage"
+            "command": "npx nx format:check --projects ng-storage"
           }
         ],
         "parallel": false

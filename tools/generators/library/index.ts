@@ -54,7 +54,7 @@ function updateLibraryProject(tree: Tree, schema: Schema) {
         options: {
           commands: [
             {
-              command: `npx nx format:write --projects ${schema.name}`
+              command: `npx nx format:check --projects ${schema.name}`
             }
           ],
           parallel: false

@@ -1,22 +1,22 @@
 {
-  "name": "ng-storage",
+  "name": "ng-auth",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "packages/ng-storage/src",
+  "sourceRoot": "packages/ng-auth/src",
   "prefix": "app",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:ng-packagr-lite",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "project": "packages/ng-storage/ng-package.json"
+        "project": "packages/ng-auth/ng-package.json"
       },
       "configurations": {
         "production": {
-          "tsConfig": "packages/ng-storage/tsconfig.lib.prod.json"
+          "tsConfig": "packages/ng-auth/tsconfig.lib.prod.json"
         },
         "development": {
-          "tsConfig": "packages/ng-storage/tsconfig.lib.json"
+          "tsConfig": "packages/ng-auth/tsconfig.lib.json"
         }
       },
       "defaultConfiguration": "production"
@@ -26,7 +26,7 @@
       "options": {
         "commands": [
           {
-            "command": "npx nx format:check --projects ng-storage"
+            "command": "npx nx format:check --projects ng-auth"
           }
         ],
         "parallel": false
@@ -37,8 +37,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "packages/ng-storage/**/*.ts",
-          "packages/ng-storage/**/*.html"
+          "packages/ng-auth/**/*.ts",
+          "packages/ng-auth/**/*.html"
         ]
       }
     },
@@ -46,7 +46,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/ng-storage/jest.config.ts",
+        "jestConfig": "packages/ng-auth/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -60,7 +60,7 @@
       "executor": "@jscutlery/semver:version",
       "options": {
         "preset": "conventional",
-        "postTargets": ["ng-storage:release:github", "ng-storage:publish"],
+        "postTargets": ["ng-auth:release:github", "ng-auth:publish"],
         "push": true
       }
     },

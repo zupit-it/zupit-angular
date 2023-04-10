@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "ng-auth": ["packages/ng-auth/src/index.ts"],
-      "ng-storage": ["packages/ng-storage/src/index.ts"]
+      "ng-storage": ["packages/ng-storage/src/index.ts"],
+      "ng-test": ["packages/ng-test/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

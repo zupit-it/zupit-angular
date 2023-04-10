@@ -89,5 +89,8 @@ export async function commitChanges(tree: Tree, schema: Schema) {
   const tag = `${schema.name}-${version}`
   const message = `chore(${schema.name}): release version ${version}`
 
-  return git.tag(['-a', tag, '-m', message])
+  await git.tag(['-a', tag, '-m', message])
+
+  await git.push()
+  return git.pushTags()
 }

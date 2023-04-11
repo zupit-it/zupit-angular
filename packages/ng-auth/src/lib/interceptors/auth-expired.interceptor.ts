@@ -103,6 +103,6 @@ export class AuthExpiredInterceptor implements HttpInterceptor {
         'ngx-auth-utils: Blacklist at least the refresh token URL for correct session expiration handling'
       )
     }
-    return this.unauthorizedUrlBlacklist.includes(url)
+    return this.unauthorizedUrlBlacklist.includes(new URL(url).pathname)
   }
 }

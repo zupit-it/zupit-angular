@@ -13,7 +13,7 @@ import { Observable } from 'rxjs'
 @Injectable({
   providedIn: 'root'
 })
-export class AnonUserService {
+export class AnonUserGuard {
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,

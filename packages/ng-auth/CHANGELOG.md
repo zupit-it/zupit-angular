@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [15.0.2](https://github.com/zupit-it/zupit-angular/compare/ng-auth-15.0.1...ng-auth-15.0.2) (2023-04-19)
+
+
+### Bug Fixes
+
+* **ng-auth:** change anon user guard name ([0d77428](https://github.com/zupit-it/zupit-angular/commit/0d77428e7294fed650fc18700b711d4a4be111ab))
+
 ## [15.0.1](https://github.com/zupit-it/zupit-angular/compare/ng-auth-15.0.0...ng-auth-15.0.1) (2023-04-11)
 
 

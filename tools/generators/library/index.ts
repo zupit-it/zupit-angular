@@ -1,5 +1,5 @@
-import { Tree, formatFiles, installPackagesTask } from '@nrwl/devkit'
-import { libraryGenerator } from '@nrwl/angular/generators'
+import { Tree, formatFiles, installPackagesTask } from '@nx/devkit'
+import { libraryGenerator } from '@nx/angular/generators'
 import {
   Schema,
   commitChanges,

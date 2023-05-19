@@ -1,4 +1,4 @@
-import { Tree, readJson, updateJson } from '@nrwl/devkit'
+import { Tree, readJson, updateJson } from '@nx/devkit'
 import { simpleGit } from 'simple-git'
 export interface Schema {
   name: string

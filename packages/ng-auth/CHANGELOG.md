@@ -2,6 +2,17 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [16.0.0](https://github.com/zupit-it/zupit-angular/compare/ng-auth-15.0.2...ng-auth-16.0.0) (2023-05-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* Nx and Angular dependency bump
+
+### Miscellaneous Chores
+
+* upgrade nx and angular ([7b7353c](https://github.com/zupit-it/zupit-angular/commit/7b7353cd5dd880b20f3b08fea9852ea2d35a5cc0))
+
 ## [15.0.2](https://github.com/zupit-it/zupit-angular/compare/ng-auth-15.0.1...ng-auth-15.0.2) (2023-04-19)
 
 

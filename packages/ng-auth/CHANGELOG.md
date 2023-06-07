@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [16.0.2](https://github.com/zupit-it/zupit-angular/compare/ng-auth-16.0.1...ng-auth-16.0.2) (2023-06-07)
+
+
+### Bug Fixes
+
+* **ng-auth:** release npm ([f695c20](https://github.com/zupit-it/zupit-angular/commit/f695c2005c16359c467b1a116bcbc9f759cb5bc7))
+
 ## [16.0.1](https://github.com/zupit-it/zupit-angular/compare/ng-auth-16.0.0...ng-auth-16.0.1) (2023-06-01)
 
 

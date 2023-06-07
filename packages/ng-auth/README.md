@@ -464,4 +464,4 @@ Then simply do your modifications, add tests to them, and simply submit a change
 - Add registration mechanism for common roles checking to improve re-usability
 - Centralize events in a service that can be subscribed (on login, on logout, on auth expired, ...)
 
-Test
+Test another thing

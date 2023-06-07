@@ -25,10 +25,14 @@ jobs:
         with:
           cache: npm
           node-version: 18
-      - run: npm ci --ignore-scripts
+          registry-url: https://registry.npmjs.org/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+      - run: npm ci
+        env:
+          HUSKY: 0
       - name: Release
         shell: bash
         run: npx nx affected --target=release --parallel=1
         env:
           GITHUB_TOKEN: ${{ secrets.ZUPIT_BOT_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

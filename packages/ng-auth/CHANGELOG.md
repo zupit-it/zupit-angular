@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [15.0.3](https://github.com/zupit-it/zupit-angular/compare/ng-auth-15.0.2...ng-auth-15.0.3) (2023-06-08)
+
+
+### Bug Fixes
+
+* **ng-auth:** blacklist url parsing ([a86e578](https://github.com/zupit-it/zupit-angular/commit/a86e578b3ffdff44538a0f3f081fa483a3caf7d1))
+
 ## [15.0.2](https://github.com/zupit-it/zupit-angular/compare/ng-auth-15.0.1...ng-auth-15.0.2) (2023-04-19)
 
 

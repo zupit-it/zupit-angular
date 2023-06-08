@@ -4,12 +4,11 @@ on:
   push:
     branches:
       - main
-      - release/*
+      - release/**
 
 jobs:
   release:
     name: Release
-    if: startsWith(github.event.ref, 'refs/tags/') != true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -41,6 +40,6 @@ jobs:
         uses: nrwl/nx-set-shas@v3
 
       - name: Release & Publish
-        run: npx nx affected --target=release --parallel=1
+        run: npx nx affected --target=release --parallel=1 -- --base-branch=${{ github.ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.ZUPIT_BOT_GITHUB_TOKEN }}

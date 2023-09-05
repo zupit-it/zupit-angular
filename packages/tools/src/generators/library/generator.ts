@@ -12,6 +12,7 @@ import { LibraryGeneratorSchema } from './schema'
 export default async function (tree: Tree, schema: LibraryGeneratorSchema) {
   await libraryGenerator(tree, { name: schema.name, buildable: true })
 
+  await updateLibraryEsLint(tree, schema)
   await updateLibraryNgPackage(tree, schema)
   await updateLibraryPackage(tree, schema)
   await updateLibraryProject(tree, schema)
@@ -20,8 +21,39 @@ export default async function (tree: Tree, schema: LibraryGeneratorSchema) {
 
   return async () => {
     await installPackagesTask(tree)
-    await commitChanges(tree, schema)
+    // await commitChanges(tree, schema)
   }
+}
+
+function updateLibraryEsLint(tree: Tree, schema: LibraryGeneratorSchema) {
+  updateJson(tree, `packages/${schema.name}/.eslintrc.json`, (eslintrc) => {
+    eslintrc.overrides.forEach((element) => {
+      const directiveSelector =
+        element.rules['@angular-eslint/directive-selector']
+      if (directiveSelector) {
+        const toCamelCase = (str: string) => {
+          return str
+            .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+              return index === 0 ? word.toLowerCase() : word.toUpperCase()
+            })
+            .replace(/\s+/g, '')
+            .replace(/-/g, '')
+        }
+
+        const prefix = toCamelCase(`ng-${schema.name}`)
+        directiveSelector[1].prefix = prefix
+      }
+
+      const componentSelector =
+        element.rules['@angular-eslint/component-selector']
+      if (componentSelector) {
+        const prefix = `ng-${schema.name}`
+        componentSelector[1].prefix = prefix
+      }
+    })
+
+    return eslintrc
+  })
 }
 
 function updateLibraryNgPackage(tree: Tree, schema: LibraryGeneratorSchema) {
@@ -34,7 +66,6 @@ function updateLibraryNgPackage(tree: Tree, schema: LibraryGeneratorSchema) {
 
 function updateLibraryPackage(tree: Tree, schema: LibraryGeneratorSchema) {
   updateJson(tree, `packages/${schema.name}/package.json`, (pkg) => {
-    pkg.name = `@zupit-it/${pkg.name}`
     pkg.repository = {
       type: 'git',
       url: 'https://github.com/zupit-it/zupit-angular.git'

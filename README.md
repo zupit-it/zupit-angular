@@ -8,4 +8,4 @@
 
 ### Generate a library
 
-Run `nx workspace-generator library` to generate a library.
+Run `npx nx generate @zupit-it/tools:library` to generate a library.

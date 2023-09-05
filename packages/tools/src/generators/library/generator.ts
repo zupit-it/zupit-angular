@@ -1,10 +1,30 @@
-import { Tree, readJson, updateJson } from '@nx/devkit'
+import { libraryGenerator } from '@nx/angular/generators'
+import {
+  Tree,
+  formatFiles,
+  installPackagesTask,
+  readJson,
+  updateJson
+} from '@nx/devkit'
 import { simpleGit } from 'simple-git'
-export interface Schema {
-  name: string
+import { LibraryGeneratorSchema } from './schema'
+
+export default async function (tree: Tree, schema: LibraryGeneratorSchema) {
+  await libraryGenerator(tree, { name: schema.name, buildable: true })
+
+  await updateLibraryNgPackage(tree, schema)
+  await updateLibraryPackage(tree, schema)
+  await updateLibraryProject(tree, schema)
+
+  await formatFiles(tree)
+
+  return async () => {
+    await installPackagesTask(tree)
+    await commitChanges(tree, schema)
+  }
 }
 
-export function updateLibraryNgPackage(tree: Tree, schema: Schema) {
+function updateLibraryNgPackage(tree: Tree, schema: LibraryGeneratorSchema) {
   updateJson(tree, `packages/${schema.name}/ng-package.json`, (ngPackage) => {
     ngPackage.assets = ['CHANGELOG.md', 'README.md']
 
@@ -12,7 +32,7 @@ export function updateLibraryNgPackage(tree: Tree, schema: Schema) {
   })
 }
 
-export function updateLibraryPackage(tree: Tree, schema: Schema) {
+function updateLibraryPackage(tree: Tree, schema: LibraryGeneratorSchema) {
   updateJson(tree, `packages/${schema.name}/package.json`, (pkg) => {
     pkg.name = `@zupit-it/${pkg.name}`
     pkg.repository = {
@@ -24,7 +44,7 @@ export function updateLibraryPackage(tree: Tree, schema: Schema) {
   })
 }
 
-export function updateLibraryProject(tree: Tree, schema: Schema) {
+function updateLibraryProject(tree: Tree, schema: LibraryGeneratorSchema) {
   updateJson(tree, `packages/${schema.name}/project.json`, (project) => {
     project.targets = {
       build: project.targets.build,
@@ -72,14 +92,14 @@ export function updateLibraryProject(tree: Tree, schema: Schema) {
   })
 }
 
-export function getAngularMajorVersion(tree: Tree) {
+function getAngularMajorVersion(tree: Tree) {
   const packageJson = readJson(tree, 'package.json')
   const angularVersion = packageJson.dependencies['@angular/core']
 
   return angularVersion.split('.')[0].replace(/[~^]/, '')
 }
 
-export async function commitChanges(tree: Tree, schema: Schema) {
+async function commitChanges(tree: Tree, schema: LibraryGeneratorSchema) {
   const git = simpleGit()
   await git.add([`packages/${schema.name}/*`, 'tsconfig.base.json'])
 

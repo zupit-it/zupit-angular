@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
-  "$id": "library",
+  "$id": "Library",
+  "title": "Name",
   "type": "object",
   "properties": {
     "name": {
@@ -10,7 +10,8 @@
       "$default": {
         "$source": "argv",
         "index": 0
-      }
+      },
+      "x-prompt": "What name would you like to use?"
     }
   },
   "required": ["name"]

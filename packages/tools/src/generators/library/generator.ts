@@ -21,7 +21,7 @@ export default async function (tree: Tree, schema: LibraryGeneratorSchema) {
 
   return async () => {
     await installPackagesTask(tree)
-    // await commitChanges(tree, schema)
+    await commitChanges(tree, schema)
   }
 }
 
@@ -40,14 +40,14 @@ function updateLibraryEsLint(tree: Tree, schema: LibraryGeneratorSchema) {
             .replace(/-/g, '')
         }
 
-        const prefix = toCamelCase(`ng-${schema.name}`)
+        const prefix = toCamelCase(`${schema.name}`)
         directiveSelector[1].prefix = prefix
       }
 
       const componentSelector =
         element.rules['@angular-eslint/component-selector']
       if (componentSelector) {
-        const prefix = `ng-${schema.name}`
+        const prefix = `${schema.name}`
         componentSelector[1].prefix = prefix
       }
     })

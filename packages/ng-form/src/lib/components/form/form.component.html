@@ -1,0 +1,11 @@
+<form
+  [formGroup]="form"
+  [class]="formStyleClass"
+  (ngFormSubmit)="submitFormSave()">
+  <div [class]="contentStyleClass">
+    <ng-content select="[content]"></ng-content>
+  </div>
+  <div [class]="footerStyleClass" *ngIf="showFooter">
+    <ng-content select="[footer]"></ng-content>
+  </div>
+</form>

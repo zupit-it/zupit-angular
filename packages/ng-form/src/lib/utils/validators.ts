@@ -1,23 +1,16 @@
-import {
-  AbstractControl,
-  AsyncValidatorFn,
-  ValidationErrors,
-  ValidatorFn,
-  Validators
-} from '@angular/forms'
-import { Observable, map, of, switchMap, timer } from 'rxjs'
+import {AbstractControl, ValidationErrors, ValidatorFn, Validators} from '@angular/forms'
 
 export class AppValidators {
   static readonly passwordValidators = [
     Validators.required,
     Validators.pattern(
-      /^((?=\S*?[A-Za-z])(?=\S*?[0-9$-/:-?{-~!"^_`£#€@]).{0,})\S$/
+        /^((?=\S*?[A-Za-z])(?=\S*?[0-9$-/:-?{-~!"^_`£#€@]).{0,})\S$/
     )
   ]
 
   static matchPassword(
-    firstInputName: string,
-    secondInputName: string
+      firstInputName: string,
+      secondInputName: string
   ): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const password = control.get(firstInputName)?.value
@@ -25,7 +18,7 @@ export class AppValidators {
 
       if (password && confirm && password !== confirm) {
         const confirmControl = control.get(secondInputName)
-        const errors = { noMatch: true }
+        const errors = {noMatch: true}
         confirmControl?.setErrors(errors)
 
         return errors
@@ -38,9 +31,11 @@ export class AppValidators {
   static notBlank(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const text = control.value?.toString() ?? ''
-      if (text.length === 0) return null
+      if (text.length === 0) {
+        return {blank: true}
+      }
 
-      return text.trim() === '' ? { blank: true } : null
+      return text.trim() === '' ? {blank: true} : null
     }
   }
 
@@ -51,7 +46,7 @@ export class AppValidators {
         const patternValidatorFn = Validators.pattern(/.*@.*\..*/)
         const patternError = patternValidatorFn(control)
         if (patternError) {
-          return { email: true }
+          return {email: true}
         }
         return null
       }
@@ -63,14 +58,14 @@ export class AppValidators {
     return (control: AbstractControl): ValidationErrors | null => {
       const patternValidatorFn = Validators.pattern('\\+?1?\\d{9,15}')
       const patternError = patternValidatorFn(control)
-      return patternError ? { phoneNumber: true } : null
+      return patternError ? {phoneNumber: true} : null
     }
   }
 
   static maxDate(maxDate: Date): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control.value && control.value > maxDate) {
-        return { maxDate }
+        return {maxDate}
       }
 
       return null
@@ -80,7 +75,7 @@ export class AppValidators {
   static minDate(minDate: Date): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control.value && control.value < minDate) {
-        return { minDate }
+        return {minDate}
       }
 
       return null
@@ -88,8 +83,8 @@ export class AppValidators {
   }
 
   static startDateBeforeEndDate(
-    startDateInputName: string,
-    endDateInputName: string
+      startDateInputName: string,
+      endDateInputName: string
   ): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const startDateValue = control.get(startDateInputName)?.value
@@ -103,53 +98,10 @@ export class AppValidators {
       const endDate = new Date(endDateValue)
 
       if (startDate.getTime() > endDate.getTime()) {
-        return { startDateAfterEndDate: true }
+        return {startDateAfterEndDate: true}
       }
 
       return null
-    }
-  }
-
-  static booleanCheckboxListRequiredTrueCount(
-    required: number,
-    controls: string[]
-  ): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const count = controls.reduce((count, controlName) => {
-        const controlValue = control.get(controlName)?.value
-        return controlValue === true ? count + 1 : count
-      }, 0)
-
-      if (count < required) {
-        return { booleanCheckboxListRequiredTrueCount: { count, required } }
-      }
-
-      return null
-    }
-  }
-
-  private static valueAvailableValidator$<ResponseType>(
-    observable: (formValue: string) => Observable<ResponseType>,
-    errorValue: ValidationErrors,
-    currentValueProvider: () => unknown,
-    getValue: (response: ResponseType) => unknown
-  ): AsyncValidatorFn {
-    return (
-      formControl: AbstractControl
-    ): Observable<ValidationErrors | null> => {
-      const value = formControl.value
-
-      if (value !== currentValueProvider()) {
-        return timer(400).pipe(
-          switchMap(() => {
-            return observable(value).pipe(
-              map((response) => (getValue(response) ? null : errorValue))
-            )
-          })
-        )
-      }
-
-      return of(null)
     }
   }
 }

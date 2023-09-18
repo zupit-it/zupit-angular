@@ -72,6 +72,7 @@ export class FormComponent<Model> implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     setFormEnabled(this.form, this.enabled && !!this.formDataLoaded, {
       disableFields: this.disabledFields,
+      force: this.forceEnabling
     })
   }
 

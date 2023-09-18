@@ -1,5 +1,5 @@
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms'
-import { AppException, getValueOrError } from './errors'
+import { FormException, getValueOrError } from './errors'
 
 export function setFormEnabled(
   form: AbstractControl,
@@ -77,6 +77,6 @@ export function validateFormWithException(
 ): void {
   const validationResult = validateForm(form)
   if (validationResult !== FormValidationResult.VALID) {
-    throw new AppException(error)
+    throw new FormException(error)
   }
 }

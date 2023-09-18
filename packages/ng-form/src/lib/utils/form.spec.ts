@@ -5,7 +5,7 @@ import {
   setFormEnabled,
   updateFormTreeValueAndValidity,
   validateForm, validateFormWithException
-} from "@zupit-it/ng-form";
+} from "./form";
 
 describe('Form Utilities', () => {
   const fb = new FormBuilder();

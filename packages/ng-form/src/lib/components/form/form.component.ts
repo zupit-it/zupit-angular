@@ -23,6 +23,10 @@ export class FormComponent<Model> implements OnChanges {
   @Input() formDataLoaded?: boolean
   @Input() enabled = false
 
+  @Input() disabledFields: string[] = []
+
+  @Input() forceEnabling = false
+
   @Input() footerStyleClass = ''
   @Input() contentStyleClass = ''
   @Input() formStyleClass = ''
@@ -54,9 +58,6 @@ export class FormComponent<Model> implements OnChanges {
 
   private _instance?: Model
 
-  private disabledFields: string[] = []
-
-  private forceEnabling = false
 
   submitFormSave(): void {
     const formValue = this.getValue()
@@ -71,7 +72,6 @@ export class FormComponent<Model> implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     setFormEnabled(this.form, this.enabled && !!this.formDataLoaded, {
       disableFields: this.disabledFields,
-      force: this.forceEnabling
     })
   }
 

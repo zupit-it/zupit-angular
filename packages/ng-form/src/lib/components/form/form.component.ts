@@ -58,7 +58,6 @@ export class FormComponent<Model> implements OnChanges {
 
   private _instance?: Model
 
-
   submitFormSave(): void {
     const formValue = this.getValue()
     this.formSubmit.emit(formValue)

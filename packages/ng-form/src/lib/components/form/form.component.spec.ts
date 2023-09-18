@@ -144,4 +144,28 @@ describe('FormComponent', () => {
     expect(component.form.get("username").enabled).toBeFalsy();
     expect(component.form.get("password").enabled).toBeTruthy();
   })
+
+  it('form should update enabled field when form is enabled only when forceEnabling is true', () => {
+     component.form = fb.group({
+      username: fb.control("username@email", [Validators.required]),
+      password: fb.control("password", [Validators.required])
+    });
+
+     component.form.enable();
+    component.enabled = true;
+    component.formDataLoaded = true;
+    component.disabledFields = ['username'];
+    component.ngOnChanges(undefined);
+
+    expect(component.form.enabled).toBeTruthy();
+    expect(component.form.get("username").enabled).toBeTruthy();
+    expect(component.form.get("password").enabled).toBeTruthy();
+
+    component.forceEnabling = true;
+    component.ngOnChanges(undefined);
+
+    expect(component.form.enabled).toBeTruthy();
+    expect(component.form.get("username").enabled).toBeFalsy();
+    expect(component.form.get("password").enabled).toBeTruthy();
+  })
 })

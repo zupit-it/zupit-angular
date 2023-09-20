@@ -84,6 +84,85 @@ It allows you to enable or disable the form from its inputs, to keep some fields
 - `pristine(): boolean`
   Returns whether the form is pristine or not.
 
+### Directives
+
+#### FormSubmitDirective
+
+The `FormSubmitDirective` is a directive which handles the form submit of a form.
+It is useful when you want to handle the form submit only when the form is valid.
+
+##### _Inputs_
+
+- `form!: FormGroup`
+  The FormGroup control that contains all form data. Required to know whether the data is valid or not.
+
+##### _Outputs_
+
+- `ngFormSubmit = new EventEmitter<Event>()`
+  Emit the data when the form is submitted and valid. If data is not valid, a FormException error is thrown.
+
+### Validators
+
+Set of useful validators to validate common fields, like password, email, phone number, etc.
+
+#### passwordValidators
+
+Field validators to check that the password is required and that the password is strong enough.
+
+#### matchPassword
+
+Form validator to check that two password fields match.
+
+#### notBlank
+
+Field validator to check that the field is not null and not empty.
+
+#### email
+
+Field validator to check that the field is a valid email.
+
+#### phoneNumber
+
+Field validator to check that the field is a valid phone number.
+
+#### maxDate
+
+Field validator to check that the field is before a max date.
+
+#### minDate
+
+Field validator to check that the field is after a min date.
+
+#### startDateBeforeOrEqualEndDate
+
+Form validator to check that the start date is before or equal to the end date.
+
+### Form Utilities
+
+Set of utilities to handle forms.
+
+#### setFormEnabled
+
+Utility to enable or disable a form. It allows to keep some fields disabled when the form is enabled.
+This utility does nothing if the form is already in the desired state, except if the flag force is true.
+
+#### updateFormTreeValueAndValidity
+
+Allows to update the value and validity of a form and all its children.
+The standard method updateValueAndValidity available in the AbstractControl class updates only its own value and validity.
+
+#### hasAnyRequiredErrors
+
+Utility to check whether a form has any required errors or not.
+
+#### validateForm
+
+Utility that checks whether the form is valid, there are missing required fields or is invalid. It marks the form as touched.
+
+#### validateFormWithException
+
+Utility that throws a FormException if the form is invalid or there are missing required fields. It marks the form as touched.
+
 ## Development & Contribution
 
 Setup the project:

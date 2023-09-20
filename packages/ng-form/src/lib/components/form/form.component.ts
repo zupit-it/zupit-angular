@@ -5,13 +5,12 @@ import {
   Input,
   OnChanges,
   Output,
-  SimpleChanges
 } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { setFormEnabled } from '../../utils/form'
 
 @Component({
-  selector: 'ng-form-form',
+  selector: 'ng-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -67,8 +66,7 @@ export class FormComponent<Model> implements OnChanges {
     return this.formValueToModelMapper(this.form.getRawValue())
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     setFormEnabled(this.form, this.enabled && !!this.formDataLoaded, {
       disableFields: this.disabledFields,
       force: this.forceEnabling

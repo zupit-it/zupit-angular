@@ -87,7 +87,7 @@ export class AppValidators {
     }
   }
 
-  static startDateBeforeEndDate(
+  static startDateBeforeOrEqualEndDate(
     startDateInputName: string,
     endDateInputName: string
   ): ValidatorFn {

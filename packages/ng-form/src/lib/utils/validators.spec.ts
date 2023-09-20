@@ -137,7 +137,10 @@ describe('Form Validators', () => {
         endDate: fb.control(new Date('2020-01-01'))
       },
       {
-        validators: AppValidators.startDateBeforeEndDate('startDate', 'endDate')
+        validators: AppValidators.startDateBeforeOrEqualEndDate(
+          'startDate',
+          'endDate'
+        )
       }
     )
 

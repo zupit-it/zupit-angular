@@ -127,25 +127,25 @@ describe('FormComponent', () => {
     })
     component.enabled = false
     component.formDataLoaded = false
-    component.ngOnChanges(undefined)
+    component.ngOnChanges()
 
     expect(component.form.enabled).toBeFalsy()
 
     component.enabled = true
     component.formDataLoaded = false
-    component.ngOnChanges(undefined)
+    component.ngOnChanges()
 
     expect(component.form.enabled).toBeFalsy()
 
     component.enabled = false
     component.formDataLoaded = true
-    component.ngOnChanges(undefined)
+    component.ngOnChanges()
 
     expect(component.form.enabled).toBeFalsy()
 
     component.enabled = true
     component.formDataLoaded = true
-    component.ngOnChanges(undefined)
+    component.ngOnChanges()
 
     expect(component.form.enabled).toBeTruthy()
   })
@@ -159,7 +159,7 @@ describe('FormComponent', () => {
     component.enabled = true
     component.formDataLoaded = true
     component.disabledFields = ['username']
-    component.ngOnChanges(undefined)
+    component.ngOnChanges()
 
     expect(component.form.enabled).toBeTruthy()
     expect(component.form.get('username').enabled).toBeFalsy()
@@ -176,14 +176,14 @@ describe('FormComponent', () => {
     component.enabled = true
     component.formDataLoaded = true
     component.disabledFields = ['username']
-    component.ngOnChanges(undefined)
+    component.ngOnChanges()
 
     expect(component.form.enabled).toBeTruthy()
     expect(component.form.get('username').enabled).toBeTruthy()
     expect(component.form.get('password').enabled).toBeTruthy()
 
     component.forceEnabling = true
-    component.ngOnChanges(undefined)
+    component.ngOnChanges()
 
     expect(component.form.enabled).toBeTruthy()
     expect(component.form.get('username').enabled).toBeFalsy()

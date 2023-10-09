@@ -93,6 +93,46 @@ describe('AuthenticationService', () => {
     })
   })
 
+  it('should login if accessToken and refreshToken are valid', (done) => {
+    const user = { name: 'Foo', surname: 'Bar', email: 'foo@bar.com' }
+    const tokenPair = {
+      accessToken: 'access-token',
+      refreshToken: 'refresh-token'
+    }
+
+    const fetchUserSpy = jest
+      .spyOn(authProvider, 'fetchUser')
+      .mockReturnValueOnce(of(user))
+
+    expect(service.isAuthenticated()).toBeFalsy()
+
+    service
+      .tokenLogin(tokenPair.accessToken, tokenPair.refreshToken)
+      .subscribe((user) => {
+        expect(user).toEqual(user)
+
+        expect(
+          storageProvider.retrieve(
+            storagePrefix + '-' + service.AUTH_ACCESS_TOKEN
+          )
+        ).toEqual(tokenPair.accessToken)
+        expect(
+          storageProvider.retrieve(
+            storagePrefix + '-' + service.AUTH_REFRESH_TOKEN
+          )
+        ).toEqual(tokenPair.refreshToken)
+
+        expect(fetchUserSpy.mock.calls.length).toEqual(1)
+
+        expect(service.isAuthenticated()).toBeTruthy()
+        service.getAuthenticationState().subscribe((auth) => {
+          expect(auth).toBeTruthy()
+          expect(auth).toEqual(user)
+          done()
+        })
+      })
+  })
+
   it('should not login if credentials are invalid', (done) => {
     const authError = { error: 'an-error' }
 

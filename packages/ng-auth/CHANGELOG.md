@@ -2,6 +2,8 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [15.0.4](https://github.com/zupit-it/zupit-angular/compare/ng-auth-15.0.3...ng-auth-15.0.4) (2023-10-09)
+
 ## [15.0.3](https://github.com/zupit-it/zupit-angular/compare/ng-auth-15.0.2...ng-auth-15.0.3) (2023-06-08)
 
 

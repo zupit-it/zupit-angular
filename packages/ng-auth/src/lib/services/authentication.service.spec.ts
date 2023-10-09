@@ -93,7 +93,7 @@ describe('AuthenticationService', () => {
     })
   })
 
-  it('should login if accessToken and refreshToken are valid', (done) => {
+  it('should login with tokenLogin if accessToken and refreshToken are valid', (done) => {
     const user = { name: 'Foo', surname: 'Bar', email: 'foo@bar.com' }
     const tokenPair = {
       accessToken: 'access-token',

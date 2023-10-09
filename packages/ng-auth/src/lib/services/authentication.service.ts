@@ -110,8 +110,11 @@ export class AuthenticationService {
     )
   }
 
-  public tokenLogin(token: string): Observable<UserType> {
-    this.setAuthenticationToken(token)
+  public tokenLogin(
+    token: string,
+    refreshToken?: string
+  ): Observable<UserType> {
+    this.setAuthenticationToken(token, refreshToken)
     return this.getAuthenticatedUser(true).pipe(
       catchError((error) => {
         this.events$.next(new AuthenticationEvent('login-failed', null))
@@ -121,13 +124,18 @@ export class AuthenticationService {
     )
   }
 
-  public setAuthenticationToken(authenticationToken: string): void {
+  public setAuthenticationToken(
+    authenticationToken: string,
+    refreshToken?: string
+  ): void {
     if (authenticationToken) {
       this.store(this.AUTH_IS_AUTHENTICATED, JSON.stringify(new Date()))
       this.store(this.AUTH_ACCESS_TOKEN, authenticationToken)
+      this.store(this.AUTH_REFRESH_TOKEN, refreshToken)
     } else {
       this.clear(this.AUTH_ACCESS_TOKEN)
       this.clear(this.AUTH_IS_AUTHENTICATED)
+      this.clear(this.AUTH_REFRESH_TOKEN)
     }
   }
 

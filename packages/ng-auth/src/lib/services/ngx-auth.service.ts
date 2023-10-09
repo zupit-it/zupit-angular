@@ -91,9 +91,13 @@ export class NgxAuthService implements OnDestroy {
    * Login by having a token, most likely from a OAuth2 provider,
    * that does not require the user to login with standard credentials
    * @param token: The authentication token
+   * @param refreshTOken: The refresh token if any
    */
-  public tokenLogin(token: string): Observable<UserType> {
-    return this.libAuthService.tokenLogin(token)
+  public tokenLogin(
+    token: string,
+    refreshToken?: string
+  ): Observable<UserType> {
+    return this.libAuthService.tokenLogin(token, refreshToken)
   }
 
   /**

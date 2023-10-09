@@ -1,6 +1,6 @@
 {
   "name": "@zupit-it/ng-auth",
-  "version": "15.0.4",
+  "version": "15.0.5",
   "peerDependencies": {
     "@angular/common": "^15.2.0",
     "@angular/core": "^15.2.0"

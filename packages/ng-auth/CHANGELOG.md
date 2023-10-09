@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [16.2.4](https://github.com/zupit-it/zupit-angular/compare/ng-auth-16.2.3...ng-auth-16.2.4) (2023-10-09)
+
+
+### Bug Fixes
+
+* **ng-auth:** fix ngx-auth signature to accept refresh token ([d6788bc](https://github.com/zupit-it/zupit-angular/commit/d6788bc0f75d83b0088894e3443810b7950e5398))
+
 ## [16.2.3](https://github.com/zupit-it/zupit-angular/compare/ng-auth-16.2.2...ng-auth-16.2.3) (2023-10-09)
 
 ## [16.2.2](https://github.com/zupit-it/zupit-angular/compare/ng-auth-16.2.1...ng-auth-16.2.2) (2023-09-05)

@@ -34,7 +34,7 @@ As usual, not storing anything is the safest choice, but usually also not the be
 ## Installation
 
 ```shell
-npm install -D @zupit-it/ng-auth
+npm install --save @zupit-it/ng-auth
 ```
 
 ## Setup

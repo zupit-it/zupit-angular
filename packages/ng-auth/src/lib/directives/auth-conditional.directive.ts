@@ -3,18 +3,19 @@ import {
   OnDestroy,
   OnInit,
   TemplateRef,
-  ViewContainerRef
-} from '@angular/core'
-import { Subscription } from 'rxjs'
-import { UserType } from '../interfaces'
-import { NgxAuthService } from '../services/ngx-auth.service'
+  ViewContainerRef,
+} from "@angular/core";
+import { Subscription } from "rxjs";
+
+import { UserType } from "../interfaces";
+import { NgxAuthService } from "../services/ngx-auth.service";
 
 @Directive()
 export abstract class AuthConditionalDirective implements OnInit, OnDestroy {
-  private showingThenTemplate?: 'then' | 'else'
+  private showingThenTemplate?: "then" | "else";
 
-  private authSub!: Subscription
-  private user: UserType
+  private authSub!: Subscription;
+  private user: UserType;
 
   public constructor(
     protected authService: NgxAuthService,
@@ -24,48 +25,48 @@ export abstract class AuthConditionalDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.authSub = this.authService.state.subscribe((user) => {
-      this.user = user
-      this.updateView()
-    })
+      this.user = user;
+      this.updateView();
+    });
   }
 
-  public abstract shouldShow(user: UserType): boolean
+  public abstract shouldShow(user: UserType): boolean;
 
   protected getElseTemplateRef(): TemplateRef<unknown> | undefined {
-    return undefined
+    return undefined;
   }
 
   private showTemplate(
     user: UserType,
     templateRef: TemplateRef<unknown>
   ): void {
-    this.viewContainer.createEmbeddedView(templateRef, { user: user })
+    this.viewContainer.createEmbeddedView(templateRef, { user: user });
   }
 
   ngOnDestroy(): void {
     if (this.authSub) {
-      this.authSub.unsubscribe()
+      this.authSub.unsubscribe();
     }
   }
 
   public updateView(): void {
-    this.toggleTemplates(this.user, this.shouldShow(this.user))
+    this.toggleTemplates(this.user, this.shouldShow(this.user));
   }
 
   private toggleTemplates(user: UserType, condition: boolean): void {
-    if (condition && this.showingThenTemplate !== 'then') {
-      this.viewContainer.clear()
-      this.showTemplate(user, this.templateRef)
-      this.showingThenTemplate = 'then'
+    if (condition && this.showingThenTemplate !== "then") {
+      this.viewContainer.clear();
+      this.showTemplate(user, this.templateRef);
+      this.showingThenTemplate = "then";
     }
 
-    if (!condition && this.showingThenTemplate !== 'else') {
-      this.viewContainer.clear()
-      const elseTemplate = this.getElseTemplateRef()
+    if (!condition && this.showingThenTemplate !== "else") {
+      this.viewContainer.clear();
+      const elseTemplate = this.getElseTemplateRef();
       if (elseTemplate) {
-        this.showTemplate(user, elseTemplate)
+        this.showTemplate(user, elseTemplate);
       }
-      this.showingThenTemplate = 'else'
+      this.showingThenTemplate = "else";
     }
   }
 }

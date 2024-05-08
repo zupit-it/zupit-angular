@@ -3,25 +3,26 @@ import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
-  HttpRequest
-} from '@angular/common/http'
-import { Inject, Injectable } from '@angular/core'
-import { Router } from '@angular/router'
-import { BehaviorSubject, Observable, throwError } from 'rxjs'
-import { catchError, filter, switchMap, take } from 'rxjs/operators'
-import { AuthenticationService } from '../services/authentication.service'
-import { StorageProvider } from '../providers/storage.provider'
+  HttpRequest,
+} from "@angular/common/http";
+import { Inject, Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { BehaviorSubject, Observable, throwError } from "rxjs";
+import { catchError, filter, switchMap, take } from "rxjs/operators";
+
 import {
   REFRESH_TOKEN,
   SESSION_EXPIRED_REDIRECT_URL,
-  UNAUTHORIZED_URL_BLACKLIST
-} from '../config'
+  UNAUTHORIZED_URL_BLACKLIST,
+} from "../config";
+import { StorageProvider } from "../providers/storage.provider";
+import { AuthenticationService } from "../services/authentication.service";
 
 @Injectable()
 export class AuthExpiredInterceptor implements HttpInterceptor {
   private refreshTokenSubject: BehaviorSubject<boolean> =
-    new BehaviorSubject<boolean>(false)
-  private handlingRefresh = false
+    new BehaviorSubject<boolean>(false);
+  private handlingRefresh = false;
 
   constructor(
     private router: Router,
@@ -46,14 +47,14 @@ export class AuthExpiredInterceptor implements HttpInterceptor {
             this.refreshToken &&
             !this.isUrlInBlacklist(request.url)
           ) {
-            return this.handleTokenRefresh(next, request, err)
+            return this.handleTokenRefresh(next, request, err);
           }
-          this.handle401Failure()
+          this.handle401Failure();
         }
 
-        return throwError(err)
+        return throwError(err);
       })
-    )
+    );
   }
 
   private handleTokenRefresh(
@@ -66,51 +67,51 @@ export class AuthExpiredInterceptor implements HttpInterceptor {
         filter((result) => result),
         take(1),
         switchMap(() => next.handle(request.clone()))
-      )
+      );
     }
 
-    this.handlingRefresh = true
-    this.refreshTokenSubject.next(false)
+    this.handlingRefresh = true;
+    this.refreshTokenSubject.next(false);
 
     return this.authenticationService.refreshToken().pipe(
       switchMap(() => {
-        this.handlingRefresh = false
-        this.refreshTokenSubject.next(true)
-        return next.handle(request.clone())
+        this.handlingRefresh = false;
+        this.refreshTokenSubject.next(true);
+        return next.handle(request.clone());
       }),
       catchError(() => {
-        this.handlingRefresh = false
-        this.handle401Failure()
-        return throwError(err)
+        this.handlingRefresh = false;
+        this.handle401Failure();
+        return throwError(err);
       })
-    )
+    );
   }
 
   private handle401Failure(): void {
-    this.authenticationService.sessionExpired()
+    this.authenticationService.sessionExpired();
 
     if (this.sessionExpiredRedirectUrl != null) {
-      this.router.navigate([this.sessionExpiredRedirectUrl])
+      this.router.navigate([this.sessionExpiredRedirectUrl]);
     }
   }
 
   private isUrlInBlacklist(url: string): boolean {
     if (this.unauthorizedUrlBlacklist.length === 0) {
       console.warn(
-        'ngx-auth-utils: Refresh token feature is enabled but unauthorizedUrlBlacklist is empty'
-      )
+        "ngx-auth-utils: Refresh token feature is enabled but unauthorizedUrlBlacklist is empty"
+      );
       console.warn(
-        'ngx-auth-utils: Blacklist at least the refresh token URL for correct session expiration handling'
-      )
+        "ngx-auth-utils: Blacklist at least the refresh token URL for correct session expiration handling"
+      );
     }
 
-    return this.unauthorizedUrlBlacklist.includes(this.getPathName(url))
+    return this.unauthorizedUrlBlacklist.includes(this.getPathName(url));
   }
 
   private getPathName(url: string): string {
-    if (url.toLowerCase().startsWith('http')) {
-      return new URL(url).pathname
+    if (url.toLowerCase().startsWith("http")) {
+      return new URL(url).pathname;
     }
-    return url
+    return url;
   }
 }

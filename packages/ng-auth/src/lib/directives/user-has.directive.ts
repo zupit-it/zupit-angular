@@ -3,56 +3,57 @@ import {
   Input,
   OnChanges,
   TemplateRef,
-  ViewContainerRef
-} from '@angular/core'
-import { AuthConditionalDirective } from './auth-conditional.directive'
-import { UserConditions } from '../utils/user-conditions'
-import { AuthUserType, Condition, UserType } from '../interfaces'
-import { NgxAuthService } from '../services/ngx-auth.service'
+  ViewContainerRef,
+} from "@angular/core";
+
+import { AuthUserType, Condition, UserType } from "../interfaces";
+import { NgxAuthService } from "../services/ngx-auth.service";
+import { UserConditions } from "../utils/user-conditions";
+import { AuthConditionalDirective } from "./auth-conditional.directive";
 
 @Directive({
-  selector: '[ngAuthHas]'
+  selector: "[ngAuthHas]",
 })
 export class UserHasDirective
   extends AuthConditionalDirective
   implements OnChanges
 {
   @Input()
-  ngAuthHas = ''
+  ngAuthHas = "";
 
   @Input()
-  ngAuthHasAny?: string[]
+  ngAuthHasAny?: string[];
 
   @Input()
-  ngAuthHasAll?: string[]
+  ngAuthHasAll?: string[];
 
   @Input()
-  ngAuthHasEq?: string
+  ngAuthHasEq?: string;
 
   @Input()
-  ngAuthHasNe?: string
+  ngAuthHasNe?: string;
 
   @Input()
-  ngAuthHasNone?: string[]
+  ngAuthHasNone?: string[];
 
   @Input()
-  ngAuthHasCond = true
+  ngAuthHasCond = true;
 
   @Input()
-  ngAuthHasUserCond?: Condition[]
+  ngAuthHasUserCond?: Condition[];
 
   @Input()
-  ngAuthHasUserCondOp: 'and' | 'or' = 'and'
+  ngAuthHasUserCondOp: "and" | "or" = "and";
 
   @Input()
-  ngAuthHasElse?: TemplateRef<unknown>
+  ngAuthHasElse?: TemplateRef<unknown>;
 
   constructor(
     authenticationService: NgxAuthService,
     templateRef: TemplateRef<unknown>,
     viewContainer: ViewContainerRef
   ) {
-    super(authenticationService, templateRef, viewContainer)
+    super(authenticationService, templateRef, viewContainer);
   }
 
   shouldShow(user: UserType): boolean {
@@ -61,65 +62,71 @@ export class UserHasDirective
       this.checkConditions(user) &&
       this.ngAuthHasCond &&
       this.checkUserConditions(user)
-    )
+    );
   }
 
   protected getElseTemplateRef(): TemplateRef<unknown> | undefined {
-    return this.ngAuthHasElse
+    return this.ngAuthHasElse;
   }
 
   private checkConditions(user: AuthUserType): boolean {
-    const attrValue: unknown = user[this.ngAuthHas]
+    const attrValue: unknown = user[this.ngAuthHas];
 
     if (attrValue === undefined) {
-      return false
+      return false;
     }
 
     if (this.ngAuthHasAny != null) {
       return UserConditions.hasAnyValues(
         attrValue as unknown[],
         this.ngAuthHasAny
-      )
+      );
     }
 
     if (this.ngAuthHasAll != null) {
       return UserConditions.hasAllValues(
         attrValue as unknown[],
         this.ngAuthHasAll
-      )
+      );
     }
 
     if (this.ngAuthHasNone != null) {
       return UserConditions.hasNoneOfTheValues(
         attrValue as unknown[],
         this.ngAuthHasNone
-      )
+      );
     }
 
     if (this.ngAuthHasEq != null) {
-      return UserConditions.hasEqValue(attrValue as unknown[], this.ngAuthHasEq)
+      return UserConditions.hasEqValue(
+        attrValue as unknown[],
+        this.ngAuthHasEq
+      );
     }
 
     if (this.ngAuthHasNe != null) {
-      return UserConditions.hasNeValue(attrValue as unknown[], this.ngAuthHasNe)
+      return UserConditions.hasNeValue(
+        attrValue as unknown[],
+        this.ngAuthHasNe
+      );
     }
 
-    throw Error('Use one of the operators: anyIn, allIn, eq')
+    throw Error("Use one of the operators: anyIn, allIn, eq");
   }
 
   ngOnChanges(): void {
-    this.updateView()
+    this.updateView();
   }
 
   private checkUserConditions(user: UserType): boolean {
     if (!this.ngAuthHasUserCond) {
-      return true
+      return true;
     }
 
     return UserConditions.evaluateConditions(
       user,
       this.ngAuthHasUserCondOp,
       this.ngAuthHasUserCond
-    )
+    );
   }
 }

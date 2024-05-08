@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { FormComponent } from './components/form/form.component'
-import { ReactiveFormsModule } from '@angular/forms'
-import { SubmitDirective } from './directives/submit.directive'
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
+
+import { FormComponent } from "./components/form/form.component";
+import { SubmitDirective } from "./directives/submit.directive";
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule],
-  declarations: [FormComponent, SubmitDirective]
+  declarations: [FormComponent, SubmitDirective],
 })
 export class NgFormModule {}

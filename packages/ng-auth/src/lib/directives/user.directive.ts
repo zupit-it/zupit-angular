@@ -1,19 +1,20 @@
-import { Directive, OnDestroy, OnInit } from '@angular/core'
-import { Subscription } from 'rxjs'
-import { AuthenticationService } from '../services/authentication.service'
-import { UserType } from '../interfaces'
+import { Directive, OnDestroy, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
+
+import { UserType } from "../interfaces";
+import { AuthenticationService } from "../services/authentication.service";
 
 @Directive({
-  selector: '[ngAuthUser]',
-  exportAs: 'userRef'
+  selector: "[ngAuthUser]",
+  exportAs: "userRef",
 })
 export class UserDirective implements OnInit, OnDestroy {
-  private authSub?: Subscription
+  private authSub?: Subscription;
 
-  private authUser: UserType = null
+  private authUser: UserType = null;
 
   public get user(): UserType {
-    return this.authUser
+    return this.authUser;
   }
 
   constructor(private authenticationService: AuthenticationService) {}
@@ -22,13 +23,13 @@ export class UserDirective implements OnInit, OnDestroy {
     this.authSub = this.authenticationService
       .getAuthenticationState()
       .subscribe((user) => {
-        this.authUser = user
-      })
+        this.authUser = user;
+      });
   }
 
   ngOnDestroy(): void {
     if (this.authSub) {
-      this.authSub.unsubscribe()
+      this.authSub.unsubscribe();
     }
   }
 }

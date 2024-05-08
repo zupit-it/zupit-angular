@@ -1,21 +1,22 @@
-import { Inject, Injectable } from '@angular/core'
+import { Inject, Injectable } from "@angular/core";
 import {
   ActivatedRouteSnapshot,
   Route,
   Router,
   RouterStateSnapshot,
   UrlSegment,
-  UrlTree
-} from '@angular/router'
-import { Observable } from 'rxjs'
-import { AuthenticationService } from '../services/authentication.service'
-import { map, take } from 'rxjs/operators'
-import { UserConditions } from '../utils/user-conditions'
-import { AuthUserPredicates } from '../interfaces'
-import { GLOBAL_USER_CONDITION_REDIRECT_URL } from '../config'
+  UrlTree,
+} from "@angular/router";
+import { Observable } from "rxjs";
+import { map, take } from "rxjs/operators";
+
+import { GLOBAL_USER_CONDITION_REDIRECT_URL } from "../config";
+import { AuthUserPredicates } from "../interfaces";
+import { AuthenticationService } from "../services/authentication.service";
+import { UserConditions } from "../utils/user-conditions";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthUserPredicateGuard {
   constructor(
@@ -30,7 +31,7 @@ export class AuthUserPredicateGuard {
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
-    return this.checkConditionsAndRedirect(childRoute, state)
+    return this.checkConditionsAndRedirect(childRoute, state);
   }
 
   /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
@@ -38,17 +39,17 @@ export class AuthUserPredicateGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
-    return this.checkConditionsAndRedirect(route, state)
+    return this.checkConditionsAndRedirect(route, state);
   }
 
   /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean | UrlTree> {
-    return this.checkConditions(route)
+    return this.checkConditions(route);
   }
 
   /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
   canMatch(route: Route): Observable<boolean | UrlTree> {
-    return this.checkConditions(route)
+    return this.checkConditions(route);
   }
 
   private checkConditionsAndRedirect(
@@ -59,21 +60,21 @@ export class AuthUserPredicateGuard {
       map((result) => {
         if (!result) {
           const localRedirectRoute =
-            route?.data?.authUserPredicate?.redirectRoute
+            route?.data?.authUserPredicate?.redirectRoute;
           if (localRedirectRoute !== false) {
             if (localRedirectRoute != null) {
-              return this.router.parseUrl(localRedirectRoute)
+              return this.router.parseUrl(localRedirectRoute);
             }
 
             if (this.globalRedirectUrl) {
-              return this.router.parseUrl(this.globalRedirectUrl)
+              return this.router.parseUrl(this.globalRedirectUrl);
             }
           }
         }
 
-        return result
+        return result;
       })
-    )
+    );
   }
 
   private checkConditions(
@@ -85,55 +86,55 @@ export class AuthUserPredicateGuard {
       map((user) => {
         const conditionsValid =
           user != null &&
-          this.checkPredicatesAgainstUser(user, route.data?.authUserPredicate)
+          this.checkPredicatesAgainstUser(user, route.data?.authUserPredicate);
         if (!conditionsValid) {
           this.authenticationService.notifyGuardBlockedAccess(
-            'AuthUserPredicateGuard',
+            "AuthUserPredicateGuard",
             route,
             state
-          )
+          );
         }
-        return conditionsValid
+        return conditionsValid;
       })
-    )
+    );
   }
 
   private checkPredicatesAgainstUser(
     user: any,
     unsafePredicates?: AuthUserPredicates
   ): boolean {
-    const predicates = this.validatePredicates(unsafePredicates)
+    const predicates = this.validatePredicates(unsafePredicates);
 
     if (!(predicates.attribute in user)) {
       console.warn(
         `AuthUserPredicateGuard: User has no attribute '${predicates.attribute}', returning false`
-      )
-      return false
+      );
+      return false;
     }
 
-    const attrValue = user[predicates.attribute]
+    const attrValue = user[predicates.attribute];
     return UserConditions.evaluate(
       predicates.condition,
       attrValue,
       predicates.value
-    )
+    );
   }
 
   private validatePredicates(
     predicates: AuthUserPredicates | undefined
   ): AuthUserPredicates {
     if (!predicates) {
-      throw Error('AuthUserPredicate guard missing parameters')
+      throw Error("AuthUserPredicate guard missing parameters");
     }
 
     if (!predicates.condition) {
-      throw Error('AuthUserPredicate guard missing condition')
+      throw Error("AuthUserPredicate guard missing condition");
     }
 
     if (!predicates.attribute) {
-      throw Error('AuthUserPredicate guard missing attribute')
+      throw Error("AuthUserPredicate guard missing attribute");
     }
 
-    return predicates
+    return predicates;
   }
 }

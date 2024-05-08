@@ -1,21 +1,22 @@
-import { Inject, Injectable } from '@angular/core'
 import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
-  HttpRequest
-} from '@angular/common/http'
-import { Observable } from 'rxjs'
-import { AUTHENTICATION_HEADER, TOKEN_TYPE } from '../config'
-import { AuthenticationService } from '../services/authentication.service'
+  HttpRequest,
+} from "@angular/common/http";
+import { Inject, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+
+import { AUTHENTICATION_HEADER, TOKEN_TYPE } from "../config";
+import { AuthenticationService } from "../services/authentication.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private authenticationService: AuthenticationService,
     @Inject(AUTHENTICATION_HEADER)
-    private authenticationHeader: string = 'Authorization',
-    @Inject(TOKEN_TYPE) private tokenType: string = 'Bearer'
+    private authenticationHeader: string = "Authorization",
+    @Inject(TOKEN_TYPE) private tokenType: string = "Bearer"
   ) {}
 
   public static addHeaderToRequest(
@@ -25,15 +26,15 @@ export class AuthInterceptor implements HttpInterceptor {
     accessToken: string
   ): HttpRequest<unknown> {
     return request.clone({
-      headers: request.headers.set(authHeader, tokenType + ' ' + accessToken)
-    })
+      headers: request.headers.set(authHeader, tokenType + " " + accessToken),
+    });
   }
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const accessToken = this.authenticationService.getAccessToken()
+    const accessToken = this.authenticationService.getAccessToken();
 
     if (accessToken) {
       const clonedReq = AuthInterceptor.addHeaderToRequest(
@@ -41,10 +42,10 @@ export class AuthInterceptor implements HttpInterceptor {
         this.authenticationHeader,
         this.tokenType,
         accessToken
-      )
-      return next.handle(clonedReq)
+      );
+      return next.handle(clonedReq);
     }
 
-    return next.handle(request)
+    return next.handle(request);
   }
 }

@@ -12,6 +12,9 @@ export const CUSTOM_ICONS_ENUM = new InjectionToken<IconsEnum>('CUSTOM_ICONS_ENU
     styleUrls: ['./zupit-icon.component.scss'],
 })
 export class ZupitIconComponent {
+    private _icon: string;
+    private _iconsNames: string[] = [];
+
     @Input() set icon(value: string) {
         if (!this.validateIcon(value)) {
             throw new Error(`Invalid icon '${value}' provided.`);
@@ -23,13 +26,13 @@ export class ZupitIconComponent {
         return this._icon;
     }
 
-    private _icon: string;
-
     private validateIcon(icon: string): boolean {
-        return Object.values(this.icons).includes(icon);
+        return this._iconsNames.includes(icon);
     }
 
     constructor(@Inject(CUSTOM_ICONS_ENUM) public icons: IconsEnum) {
+        //todo save object values in a var
+
         if (!icons) {
             throw new Error('CUSTOM_ICONS_ENUM not provided. Please provide the Icons enum.');
         }
@@ -37,5 +40,7 @@ export class ZupitIconComponent {
         if(typeof icons !== "object") {
             throw new Error('CUSTOM_ICONS_ENUM not valid. Please provide a valid Icons enum.');
         }
+
+        this._iconsNames = Object.values(icons);
     }
 }

@@ -60,7 +60,7 @@ export class AuthExpiredInterceptor implements HttpInterceptor {
     next: HttpHandler,
     request: HttpRequest<unknown>,
     err: HttpErrorResponse
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<unknown>> {
     if (this.handlingRefresh) {
       return this.refreshTokenSubject.pipe(
         filter((result) => result),

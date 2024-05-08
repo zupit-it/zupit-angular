@@ -1,5 +1,4 @@
 import {
-  EnvironmentProviders,
   ModuleWithProviders,
   NgModule,
   Provider

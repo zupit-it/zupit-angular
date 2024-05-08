@@ -23,6 +23,9 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
+      "parserOptions": {
+        "project": ["tsconfig.*?.json"]
+      },
       "extends": ["plugin:@nx/typescript"],
       "rules": {}
     },
@@ -42,6 +45,48 @@
       "files": "*.json",
       "parser": "jsonc-eslint-parser",
       "rules": {}
+    },
+    {
+      "files": ["*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": "tsconfig.*?.json"
+      },
+      "plugins": ["rxjs", "eslint-plugin-rxjs", "rxjs-angular"],
+      "rules": {
+        "rxjs/finnish": [
+          "error",
+          {
+            "functions": false,
+            "methods": false,
+            "names": {
+              "^(canActivate|canActivateChild|canDeactivate|canLoad|intercept|resolve|validate|store)$": false
+            },
+            "parameters": true,
+            "properties": false,
+            "strict": false,
+            "types": {
+              "^EventEmitter$": false
+            },
+            "variables": true
+          }
+        ],
+        "rxjs/no-unsafe-takeuntil": [
+          "error",
+          {
+            "alias": ["untilDestroyed"]
+          }
+        ],
+        "rxjs-angular/prefer-takeuntil": [
+          "error",
+          {
+            "alias": ["untilDestroyed"],
+            "checkComplete": true,
+            "checkDecorators": ["Component", "Directive", "Pipe"],
+            "checkDestroy": false
+          }
+        ]
+      }
     }
   ]
 }

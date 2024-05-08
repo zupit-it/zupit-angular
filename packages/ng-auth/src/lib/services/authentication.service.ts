@@ -71,7 +71,7 @@ export class AuthenticationService {
             this.logout()
             return throwError(error)
           }),
-          tap((account: any | null) => {
+          tap((account: unknown | null) => {
             this.authenticate(account)
           }),
           shareReplay()
@@ -180,7 +180,7 @@ export class AuthenticationService {
     return this.getRefreshToken() != null
   }
 
-  private getMetadata(): any | null {
+  private getMetadata(): { [key: string]: unknown } | null {
     const meta = this.retrieve(this.AUTH_METADATA)
     if (meta) {
       return JSON.parse(meta)

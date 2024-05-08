@@ -6,10 +6,12 @@ export abstract class AuthenticationProvider {
 
   public abstract doLogin(credentials: unknown): Observable<AccessTokenModel>
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public refreshToken(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     accessToken: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     refreshToken: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     metadata?: { [key: string]: unknown }
   ): Observable<AccessTokenModel> {
     // TODO: Improve error: When there is a refresh token but no implementation for renewing it

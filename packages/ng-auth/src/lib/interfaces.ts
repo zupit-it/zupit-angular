@@ -13,7 +13,7 @@ export type AuthenticationEventType =
   | 'initialized'
   | 'guard-blocked-access'
 
-export type AuthUserType = any
+export type AuthUserType = unknown
 
 export type UserType = AuthUserType | null
 
@@ -22,7 +22,7 @@ export type ConditionOperators = 'eq' | 'ne' | 'any' | 'all' | 'none'
 export type Condition = [
   attribute: string,
   condition: ConditionOperators,
-  value: any
+  value: unknown
 ]
 
 export interface AccessTokenModel {
@@ -35,7 +35,7 @@ export interface AccessTokenModel {
 export interface AuthUserPredicates {
   condition: ConditionOperators
   attribute: string
-  value: any
+  value: unknown
   redirectRoute?: string | false
 }
 

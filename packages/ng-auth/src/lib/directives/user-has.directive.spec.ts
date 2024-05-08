@@ -37,10 +37,10 @@ describe('UserHasDirective', () => {
   let authService: AuthenticationService
 
   function mockAuthState(user: UserType): void {
-    const authState = new BehaviorSubject<UserType>(user)
+    const authState$ = new BehaviorSubject<UserType>(user)
     jest
       .spyOn(authService, 'getAuthenticationState')
-      .mockReturnValue(authState.asObservable())
+      .mockReturnValue(authState$.asObservable())
     fixture.detectChanges()
   }
 

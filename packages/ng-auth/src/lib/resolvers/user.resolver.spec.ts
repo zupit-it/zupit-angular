@@ -32,17 +32,17 @@ describe('UserResolver', () => {
 
   it('resolves authenticated user', (done) => {
     const user = { user: 'username' }
-    const authState = new BehaviorSubject<UserType>(user)
+    const authState$ = new BehaviorSubject<UserType>(user)
 
     const getAuthenticationStateSpy = jest
       .spyOn(authService, 'getAuthenticationState')
-      .mockReturnValue(authState.asObservable())
+      .mockReturnValue(authState$.asObservable())
 
-    const result = resolver.resolve()
+    const result$ = resolver.resolve()
 
     expect(getAuthenticationStateSpy.mock.calls.length).toEqual(1)
 
-    result.subscribe((value) => {
+    result$.subscribe((value) => {
       expect(value).toEqual(user)
       done()
     })

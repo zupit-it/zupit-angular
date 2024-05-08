@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core'
 import {
-  ActivatedRouteSnapshot,
+  ActivatedRouteSnapshot, Data,
   Route,
   Router,
   RouterStateSnapshot,
@@ -99,7 +99,7 @@ export class AuthUserPredicateGuard {
   }
 
   private checkPredicatesAgainstUser(
-    user: any,
+    user: Data,
     unsafePredicates?: AuthUserPredicates
   ): boolean {
     const predicates = this.validatePredicates(unsafePredicates)

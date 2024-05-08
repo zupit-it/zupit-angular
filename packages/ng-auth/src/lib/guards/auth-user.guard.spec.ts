@@ -1,16 +1,10 @@
-import {
-  ActivatedRouteSnapshot,
-  Router,
-  RouterStateSnapshot,
-  UrlTree
-} from '@angular/router'
-import { Observable, of } from 'rxjs'
-import { AuthenticationService } from '../services/authentication.service'
-import { AuthUserGuard } from './auth-user.guard'
+import {ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree} from '@angular/router'
+import {Observable, of} from 'rxjs'
+import {AuthenticationService} from '../services/authentication.service'
+import {AuthUserGuard} from './auth-user.guard'
 
 describe('AuthUserPredicateGuard', () => {
   let guard: AuthUserGuard
-  let router: Router
   const serviceStub: Partial<AuthenticationService> = {}
 
   describe('Unauthenticated, without redirect', () => {
@@ -27,7 +21,7 @@ describe('AuthUserPredicateGuard', () => {
         routerSpy,
         undefined
       )
-      serviceStub.getAuthenticationState = (): Observable<any> => of(null)
+      serviceStub.getAuthenticationState = (): Observable<unknown> => of(null)
       eventCalled = false
       serviceStub.notifyGuardBlockedAccess = (): void => {
         eventCalled = true
@@ -64,7 +58,7 @@ describe('AuthUserPredicateGuard', () => {
         routerSpy,
         '/error'
       )
-      serviceStub.getAuthenticationState = (): Observable<any> => of(null)
+      serviceStub.getAuthenticationState = (): Observable<unknown> => of(null)
       eventCalled = false
       serviceStub.notifyGuardBlockedAccess = (): void => {
         eventCalled = true
@@ -107,7 +101,7 @@ describe('AuthUserPredicateGuard', () => {
         routerSpy,
         undefined
       )
-      serviceStub.getAuthenticationState = (): Observable<any> =>
+      serviceStub.getAuthenticationState = (): Observable<unknown> =>
         of({ username: 'foo' })
     })
 

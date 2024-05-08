@@ -1,15 +1,9 @@
-import { AuthUserPredicateGuard } from './auth-user-predicate.guard'
-import {
-  ActivatedRouteSnapshot,
-  Route,
-  Router,
-  RouterStateSnapshot,
-  UrlTree
-} from '@angular/router'
-import { EMPTY, Observable, of } from 'rxjs'
-import { AuthenticationService } from '../services/authentication.service'
-import { catchError } from 'rxjs/operators'
-import { AuthUserPredicates } from '../interfaces'
+import {AuthUserPredicateGuard} from './auth-user-predicate.guard'
+import {ActivatedRouteSnapshot, Route, RouterStateSnapshot, UrlTree} from '@angular/router'
+import {EMPTY, Observable, of} from 'rxjs'
+import {AuthenticationService} from '../services/authentication.service'
+import {catchError} from 'rxjs/operators'
+import {AuthUserPredicates} from '../interfaces'
 
 describe('AuthUserPredicateGuard', () => {
   let guard: AuthUserPredicateGuard
@@ -49,7 +43,7 @@ describe('AuthUserPredicateGuard', () => {
 
   describe('Performs validation checks', () => {
     beforeEach(() => {
-      serviceStub.getAuthenticationState = (): Observable<any> =>
+      serviceStub.getAuthenticationState = (): Observable<unknown> =>
         of({ username: 'foo' })
     })
 
@@ -123,7 +117,7 @@ describe('AuthUserPredicateGuard', () => {
     let eventCalled = false
 
     beforeEach(() => {
-      serviceStub.getAuthenticationState = (): Observable<any> => of(null)
+      serviceStub.getAuthenticationState = (): Observable<unknown> => of(null)
       dummyRoute = createRouteSnapshotData({
         condition: 'eq',
         value: 'bye',
@@ -258,7 +252,7 @@ describe('AuthUserPredicateGuard', () => {
     let eventCalled = false
 
     beforeEach(() => {
-      serviceStub.getAuthenticationState = (): Observable<any> => of(user)
+      serviceStub.getAuthenticationState = (): Observable<unknown> => of(user)
       fakeState = fakeRouterState('/')
       eventCalled = false
       serviceStub.notifyGuardBlockedAccess = (): void => {

@@ -1,86 +1,86 @@
 import {
   DynamicStorageProvider,
-  STORAGE_TIMESTAMP_FIELD,
-} from "./storage.provider";
+  STORAGE_TIMESTAMP_FIELD
+} from './storage.provider'
 
-describe.only("Dynamic Storage provider", () => {
+describe.only('Dynamic Storage provider', () => {
   function extractLocalStorageTimestamp(): Date {
     const timestampStr: string | null = localStorage.getItem(
       STORAGE_TIMESTAMP_FIELD
-    );
-    expect(timestampStr).toBeTruthy();
+    )
+    expect(timestampStr).toBeTruthy()
 
     // Make the compiler happy..
     if (!timestampStr) {
-      throw Error();
+      throw Error()
     }
-    return new Date(timestampStr);
+    return new Date(timestampStr)
   }
 
   beforeEach(() => {
-    localStorage.clear();
-    sessionStorage.clear();
-  });
+    localStorage.clear()
+    sessionStorage.clear()
+  })
 
   afterEach(() => {
     // restore the spy created with spyOn
-    jest.restoreAllMocks();
-  });
+    jest.restoreAllMocks()
+  })
 
-  it("dynamic storage does not default to any provider if no previous one is found", () => {
-    const sut = new DynamicStorageProvider();
-    const key = sut.retrieve("foo");
+  it('dynamic storage does not default to any provider if no previous one is found', () => {
+    const sut = new DynamicStorageProvider()
+    const key = sut.retrieve('foo')
 
-    expect(key).toBeNull();
-    expect(sut.getType()).toBeFalsy();
-  });
+    expect(key).toBeNull()
+    expect(sut.getType()).toBeFalsy()
+  })
 
-  it("dynamic storage automatically uses last used storage if any", () => {
-    const baseTime = new Date();
-    jest.spyOn(global, "Date").mockImplementation(() => baseTime);
+  it('dynamic storage automatically uses last used storage if any', () => {
+    const baseTime = new Date()
+    jest.spyOn(global, 'Date').mockImplementation(() => baseTime)
 
-    const prevStorage = new DynamicStorageProvider();
-    prevStorage.setType("local");
-    prevStorage.store("foo", "bar");
+    const prevStorage = new DynamicStorageProvider()
+    prevStorage.setType('local')
+    prevStorage.store('foo', 'bar')
 
-    const timestamp = extractLocalStorageTimestamp();
-    expect(timestamp).toEqual(baseTime);
+    const timestamp = extractLocalStorageTimestamp()
+    expect(timestamp).toEqual(baseTime)
 
-    const newTime = new Date(baseTime.getTime() + 100);
-    jest.spyOn(global, "Date").mockImplementation(() => newTime);
+    const newTime = new Date(baseTime.getTime() + 100)
+    jest.spyOn(global, 'Date').mockImplementation(() => newTime)
 
-    const sut = new DynamicStorageProvider();
-    expect(sut.getType()).toEqual("local");
+    const sut = new DynamicStorageProvider()
+    expect(sut.getType()).toEqual('local')
 
-    const newTimestamp = extractLocalStorageTimestamp();
-    expect(newTimestamp).toEqual(newTime);
-  });
+    const newTimestamp = extractLocalStorageTimestamp()
+    expect(newTimestamp).toEqual(newTime)
+  })
 
-  it("uses last used storage if more than one found", () => {
-    const localTime = new Date();
-    const sessionTime = new Date(localTime.getTime() + 2000);
+  it('uses last used storage if more than one found', () => {
+    const localTime = new Date()
+    const sessionTime = new Date(localTime.getTime() + 2000)
 
-    localStorage.setItem(STORAGE_TIMESTAMP_FIELD, localTime.toISOString());
-    sessionStorage.setItem(STORAGE_TIMESTAMP_FIELD, sessionTime.toISOString());
+    localStorage.setItem(STORAGE_TIMESTAMP_FIELD, localTime.toISOString())
+    sessionStorage.setItem(STORAGE_TIMESTAMP_FIELD, sessionTime.toISOString())
 
-    const sut = new DynamicStorageProvider();
-    expect(sut.getType()).toEqual("session");
+    const sut = new DynamicStorageProvider()
+    expect(sut.getType()).toEqual('session')
 
-    const newLocal = new Date(sessionTime.getTime() + 2000);
-    localStorage.setItem(STORAGE_TIMESTAMP_FIELD, newLocal.toISOString());
+    const newLocal = new Date(sessionTime.getTime() + 2000)
+    localStorage.setItem(STORAGE_TIMESTAMP_FIELD, newLocal.toISOString())
 
-    const anotherSut = new DynamicStorageProvider();
-    expect(anotherSut.getType()).toEqual("local");
-  });
+    const anotherSut = new DynamicStorageProvider()
+    expect(anotherSut.getType()).toEqual('local')
+  })
 
-  it("checks that storage is initialized when using clear and store", () => {
-    const sut = new DynamicStorageProvider();
+  it('checks that storage is initialized when using clear and store', () => {
+    const sut = new DynamicStorageProvider()
 
     expect(function () {
-      sut.clear("foo");
-    }).toThrow(Error("Storage not initialized"));
+      sut.clear('foo')
+    }).toThrow(Error('Storage not initialized'))
     expect(function () {
-      sut.store("foo", "bar");
-    }).toThrow(Error("Storage not initialized"));
-  });
-});
+      sut.store('foo', 'bar')
+    }).toThrow(Error('Storage not initialized'))
+  })
+})

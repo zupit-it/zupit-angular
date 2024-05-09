@@ -3,43 +3,43 @@ import {
   Input,
   OnChanges,
   TemplateRef,
-  ViewContainerRef,
-} from "@angular/core";
+  ViewContainerRef
+} from '@angular/core'
 
-import { UserType } from "../interfaces";
-import { NgxAuthService } from "../services/ngx-auth.service";
-import { AuthConditionalDirective } from "./auth-conditional.directive";
+import { UserType } from '../interfaces'
+import { NgxAuthService } from '../services/ngx-auth.service'
+import { AuthConditionalDirective } from './auth-conditional.directive'
 
 @Directive({
-  selector: "[ngAuth]",
+  selector: '[ngAuth]'
 })
 export class IsAuthDirective
   extends AuthConditionalDirective
   implements OnChanges
 {
   @Input()
-  ngAuth = true;
+  ngAuth = true
 
   @Input()
-  ngAuthElse?: TemplateRef<unknown>;
+  ngAuthElse?: TemplateRef<unknown>
 
   constructor(
     authenticationService: NgxAuthService,
     templateRef: TemplateRef<unknown>,
     viewContainer: ViewContainerRef
   ) {
-    super(authenticationService, templateRef, viewContainer);
+    super(authenticationService, templateRef, viewContainer)
   }
 
   shouldShow(user: UserType): boolean {
-    return !!user === this.ngAuth;
+    return !!user === this.ngAuth
   }
 
   protected getElseTemplateRef(): TemplateRef<unknown> | undefined {
-    return this.ngAuthElse;
+    return this.ngAuthElse
   }
 
   ngOnChanges(): void {
-    this.updateView();
+    this.updateView()
   }
 }

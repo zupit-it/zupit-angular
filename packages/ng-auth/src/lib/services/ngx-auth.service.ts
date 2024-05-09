@@ -1,18 +1,18 @@
-import { Injectable, OnDestroy } from "@angular/core";
-import { Observable, Subscription } from "rxjs";
+import { Injectable, OnDestroy } from '@angular/core'
+import { Observable, Subscription } from 'rxjs'
 
-import { AuthUserSnapshot, AuthenticationEvent, UserType } from "../interfaces";
-import { AuthenticationService } from "./authentication.service";
+import { AuthUserSnapshot, AuthenticationEvent, UserType } from '../interfaces'
+import { AuthenticationService } from './authentication.service'
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class NgxAuthService implements OnDestroy {
   private userSnapshot: AuthUserSnapshot = {
     authenticated: false,
-    user: null,
-  };
-  private authStateSub?: Subscription;
+    user: null
+  }
+  private authStateSub?: Subscription
 
   /**
    * Emits the authentication state, which can be either:
@@ -20,7 +20,7 @@ export class NgxAuthService implements OnDestroy {
    * - An object representing the user instance if authenticated
    */
   public get state(): Observable<UserType> {
-    return this.libAuthService.getAuthenticationState();
+    return this.libAuthService.getAuthenticationState()
   }
 
   /**
@@ -32,14 +32,14 @@ export class NgxAuthService implements OnDestroy {
    * - session-expired: The authenticated user session expired
    */
   public get events(): Observable<AuthenticationEvent> {
-    return this.libAuthService.getAuthenticationEvents();
+    return this.libAuthService.getAuthenticationEvents()
   }
 
   /**
    * Returns the current authentication state snapshot, which can be used synchronously.
    */
   public get snapshot(): AuthUserSnapshot {
-    return this.userSnapshot;
+    return this.userSnapshot
   }
 
   constructor(private libAuthService: AuthenticationService) {}
@@ -54,11 +54,11 @@ export class NgxAuthService implements OnDestroy {
       .subscribe((user) => {
         this.userSnapshot = {
           authenticated: user != null,
-          user: user,
-        };
-      });
+          user: user
+        }
+      })
 
-    return this.libAuthService.initialize();
+    return this.libAuthService.initialize()
   }
 
   /**
@@ -69,7 +69,7 @@ export class NgxAuthService implements OnDestroy {
    * require to be updated
    */
   public refreshUser(): Observable<UserType> {
-    return this.libAuthService.getAuthenticatedUser(true);
+    return this.libAuthService.getAuthenticatedUser(true)
   }
 
   /**
@@ -78,14 +78,14 @@ export class NgxAuthService implements OnDestroy {
    * @param credentials: The credentials required by your authentication implementation
    */
   public login<K>(credentials: K): Observable<UserType> {
-    return this.libAuthService.login(credentials);
+    return this.libAuthService.login(credentials)
   }
 
   /**
    * Logs the user out. Clears the authentication state and all associated storage data
    */
   public logout(): void {
-    this.libAuthService.logout();
+    this.libAuthService.logout()
   }
 
   /**
@@ -98,17 +98,17 @@ export class NgxAuthService implements OnDestroy {
     token: string,
     refreshToken?: string
   ): Observable<UserType> {
-    return this.libAuthService.tokenLogin(token, refreshToken);
+    return this.libAuthService.tokenLogin(token, refreshToken)
   }
 
   /**
    * Retrieve the authentication token
    */
   public getAccessToken(): string | null {
-    return this.libAuthService.getAccessToken();
+    return this.libAuthService.getAccessToken()
   }
 
   ngOnDestroy(): void {
-    this.authStateSub?.unsubscribe();
+    this.authStateSub?.unsubscribe()
   }
 }

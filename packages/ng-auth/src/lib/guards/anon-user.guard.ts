@@ -1,18 +1,18 @@
-import { Inject, Injectable } from "@angular/core";
+import { Inject, Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
   Router,
   RouterStateSnapshot,
-  UrlTree,
-} from "@angular/router";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+  UrlTree
+} from '@angular/router'
+import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
 
-import { HOME_URL } from "../config";
-import { AuthenticationService } from "../services/authentication.service";
+import { HOME_URL } from '../config'
+import { AuthenticationService } from '../services/authentication.service'
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class AnonUserGuard {
   constructor(
@@ -29,14 +29,14 @@ export class AnonUserGuard {
       map((identity) => {
         if (identity != null) {
           this.authenticationService.notifyGuardBlockedAccess(
-            "AnonUserGuard",
+            'AnonUserGuard',
             route,
             state
-          );
-          return this.router.parseUrl(this.homeUrl);
+          )
+          return this.router.parseUrl(this.homeUrl)
         }
-        return true;
+        return true
       })
-    );
+    )
   }
 }

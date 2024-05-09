@@ -1,19 +1,19 @@
-import { Inject, Injectable } from "@angular/core";
+import { Inject, Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
   Route,
   Router,
   RouterStateSnapshot,
-  UrlTree,
-} from "@angular/router";
-import { Observable } from "rxjs";
-import { map, take } from "rxjs/operators";
+  UrlTree
+} from '@angular/router'
+import { Observable } from 'rxjs'
+import { map, take } from 'rxjs/operators'
 
-import { NO_AUTH_REDIRECT_URL } from "../config";
-import { AuthenticationService } from "../services/authentication.service";
+import { NO_AUTH_REDIRECT_URL } from '../config'
+import { AuthenticationService } from '../services/authentication.service'
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class AuthUserGuard {
   constructor(
@@ -26,22 +26,22 @@ export class AuthUserGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
-    return this.checkAuthAndRedirect(route, state);
+    return this.checkAuthAndRedirect(route, state)
   }
 
   canActivateChild(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
-    return this.checkAuthAndRedirect(route, state);
+    return this.checkAuthAndRedirect(route, state)
   }
 
   canLoad(): Observable<boolean> {
-    return this.checkAuthentication();
+    return this.checkAuthentication()
   }
 
   canMatch(): Observable<boolean> {
-    return this.checkAuthentication();
+    return this.checkAuthentication()
   }
 
   private checkAuthAndRedirect(
@@ -51,11 +51,11 @@ export class AuthUserGuard {
     return this.checkAuthentication(route, state).pipe(
       map((isAuth) => {
         if (!isAuth && this.noAuthRedirectUrl != null) {
-          return this.router.parseUrl(this.noAuthRedirectUrl);
+          return this.router.parseUrl(this.noAuthRedirectUrl)
         }
-        return isAuth;
+        return isAuth
       })
-    );
+    )
   }
 
   private checkAuthentication(
@@ -67,14 +67,14 @@ export class AuthUserGuard {
       map((user) => {
         if (user == null) {
           this.authenticationService.notifyGuardBlockedAccess(
-            "AuthUserGuard",
+            'AuthUserGuard',
             route,
             state
-          );
-          return false;
+          )
+          return false
         }
-        return true;
+        return true
       })
-    );
+    )
   }
 }

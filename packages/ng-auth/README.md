@@ -47,7 +47,7 @@ npm install --save @zupit-it/ng-auth
      authenticationProvider: {
        provide: AuthenticationProvider,
        useClass: MyAuthenticationProvider,
-       deps: [MyDep1, MyDep2],
+       deps: [MyDep1, MyDep2]
      },
 
      // Optional: Tells the library where to store data.
@@ -56,39 +56,39 @@ npm install --save @zupit-it/ng-auth
      // If not provided, defaults to MemoryStorageProvider.
      storageProvider: {
        provide: StorageProvider,
-       useClass: LocalStorageProvider,
+       useClass: LocalStorageProvider
      },
 
      // Optional: If set, the AnonUserGuard redirect to this url when user is authenticated
-     homeUrl: "/",
+     homeUrl: '/',
 
      // Optional: If set, the AuthUserGuard redirects to this url when user is not authenticated
-     noAuthRedirectUrl: "/auth/login",
+     noAuthRedirectUrl: '/auth/login',
 
      // Optional: If set, the http-interceptor will redirecto to this url when session is expired
-     sessionExpiredRedirectUrl: "/auth/login",
+     sessionExpiredRedirectUrl: '/auth/login',
 
      // Optional: the header used for the authentication key. Defaults to 'Authorization'
-     authenticationHeader: "Authorization",
+     authenticationHeader: 'Authorization',
 
      // Optional: The token type.
      // Can be one of 'Token' and 'Bearer'.
      // Defaults to 'Bearer'
-     tokenType: "Bearer",
-   });
+     tokenType: 'Bearer'
+   })
    ```
 
 2. Initialize the `NgxAuthService` in your root component:
 
    ```typescript
    @Component({
-     selector: "app-root",
-     templateUrl: "./app.component.html",
-     styleUrls: ["./app.component.scss"],
+     selector: 'app-root',
+     templateUrl: './app.component.html',
+     styleUrls: ['./app.component.scss']
    })
    export class AppComponent {
      constructor(private ngxAuthService: NgxAuthService) {
-       this.ngxAuthService.initialize().subscribe();
+       this.ngxAuthService.initialize().subscribe()
      }
    }
    ```
@@ -99,10 +99,10 @@ npm install --save @zupit-it/ng-auth
    export function initializeApp(authService: NgxAuthService) {
      return (): Promise<void> => {
        return new Promise<void>((resolve) => {
-         authService.initialize().subscribe();
-         resolve();
-       });
-     };
+         authService.initialize().subscribe()
+         resolve()
+       })
+     }
    }
 
    // Add the APP_INITIALIZIER provider
@@ -111,9 +111,9 @@ npm install --save @zupit-it/ng-auth
        provide: APP_INITIALIZER,
        useFactory: initializeApp,
        deps: [NgxAuthService],
-       multi: true,
-     },
-   ];
+       multi: true
+     }
+   ]
    ```
 
 3. Provide your authentication provider implementation:
@@ -127,18 +127,18 @@ npm install --save @zupit-it/ng-auth
    Attempts to login
 
    ```typescript
-   import { AccessTokenModel, AuthenticationProvider } from "ngx-auth-utils";
+   import { AccessTokenModel, AuthenticationProvider } from 'ngx-auth-utils'
 
    export class MyAuthenticationProvider extends AuthenticationProvider {
      constructor(private myService: MyDep1, private myService2: MyDep2) {
-       super();
+       super()
      }
 
      /**
           Mandatory: Fetch the user identity
         */
      fetchUser(): Observable<MyUserType> {
-       return this.myService.getUser();
+       return this.myService.getUser()
      }
 
      /**
@@ -150,10 +150,10 @@ npm install --save @zupit-it/ng-auth
          map((loginResponse: MyLoginResponse) => {
            return {
              accessToken: loginResponse.access,
-             refreshToken: loginResponse.refresh,
-           };
+             refreshToken: loginResponse.refresh
+           }
          })
-       );
+       )
      }
 
      refreshToken(
@@ -162,16 +162,16 @@ npm install --save @zupit-it/ng-auth
      ): Observable<AccessTokenModel> {
        return this.tokenService
          .tokenRefreshCreate$Json({
-           body: { access: accessToken, refresh: refreshToken },
+           body: { access: accessToken, refresh: refreshToken }
          })
          .pipe(
            map((tokenPair: TokenRefreshResponse) => {
              return {
                accessToken: tokenPair.access,
-               refreshToken: refreshToken,
-             };
+               refreshToken: refreshToken
+             }
            })
-         );
+         )
      }
    }
    ```
@@ -282,14 +282,14 @@ Here is an example:
 ```typescript
 const routes: Routes = [
   {
-    path: "auth",
+    path: 'auth',
     loadChildren: (() =>
-      import("./modules/auth/auth.module").then(
+      import('./modules/auth/auth.module').then(
         (m) => m.AuthModule
       )) as LoadChildren,
-    canLoad: [AnonUserGuard],
-  },
-];
+    canLoad: [AnonUserGuard]
+  }
+]
 ```
 
 ### AnonUserGuard
@@ -309,14 +309,14 @@ Here is an example:
 ```typescript
 const routes: Routes = [
   {
-    path: "home",
+    path: 'home',
     loadChildren: (() =>
-      import("./modules/home/home.module").then(
+      import('./modules/home/home.module').then(
         (m) => m.HomeModule
       )) as LoadChildren,
-    canActivate: [AuthUserGuard],
-  },
-];
+    canActivate: [AuthUserGuard]
+  }
+]
 ```
 
 ### AuthUserPredicateGuard
@@ -330,17 +330,17 @@ Here is an example:
 ```typescript
 const routes: Routes = [
   {
-    path: "home",
+    path: 'home',
     canActivate: [AuthUserPredicateGuard],
     data: {
       authUserPredicate: {
-        condition: "eq",
-        attribute: "email",
-        value: "foo@bar.com",
-      },
-    },
-  },
-];
+        condition: 'eq',
+        attribute: 'email',
+        value: 'foo@bar.com'
+      }
+    }
+  }
+]
 ```
 
 ### Directives
@@ -371,9 +371,9 @@ Let's assume your user model looks like this:
 
 ```typescript
 export interface User {
-  name: string;
-  email: string;
-  groups: string[];
+  name: string
+  email: string
+  groups: string[]
 }
 ```
 

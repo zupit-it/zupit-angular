@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'zu-icon',
+  displayName: 'ng-fantasticon',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/packages/zu-icon',
+  coverageDirectory: '../../coverage/packages/ng-fantasticon',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

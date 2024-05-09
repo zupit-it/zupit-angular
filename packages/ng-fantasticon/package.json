@@ -1,5 +1,5 @@
 {
-  "name": "@zupit-it/zu-icon",
+  "name": "@zupit-it/ng-fantasticon",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^16.2.0",

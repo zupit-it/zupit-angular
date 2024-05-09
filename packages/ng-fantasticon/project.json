@@ -1,7 +1,7 @@
 {
-  "name": "zu-icon",
+  "name": "ng-fantasticon",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/zu-icon/src",
+  "sourceRoot": "packages/ng-fantasticon/src",
   "prefix": "zupit-it",
   "tags": [],
   "projectType": "library",
@@ -10,14 +10,14 @@
       "executor": "@nx/angular:ng-packagr-lite",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "project": "packages/zu-icon/ng-package.json"
+        "project": "packages/ng-fantasticon/ng-package.json"
       },
       "configurations": {
         "production": {
-          "tsConfig": "packages/zu-icon/tsconfig.lib.prod.json"
+          "tsConfig": "packages/ng-fantasticon/tsconfig.lib.prod.json"
         },
         "development": {
-          "tsConfig": "packages/zu-icon/tsconfig.lib.json"
+          "tsConfig": "packages/ng-fantasticon/tsconfig.lib.json"
         }
       },
       "defaultConfiguration": "production"
@@ -27,7 +27,7 @@
       "options": {
         "commands": [
           {
-            "command": "npx nx format:check --projects zu-icon"
+            "command": "npx nx format:check --projects ng-fantasticon"
           }
         ],
         "parallel": false
@@ -38,9 +38,9 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "packages/zu-icon/**/*.ts",
-          "packages/zu-icon/**/*.html",
-          "packages/zu-icon/package.json"
+          "packages/ng-fantasticon/**/*.ts",
+          "packages/ng-fantasticon/**/*.html",
+          "packages/ng-fantasticon/package.json"
         ]
       }
     },
@@ -48,7 +48,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/zu-icon/jest.config.ts",
+        "jestConfig": "packages/ng-fantasticon/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -62,7 +62,10 @@
       "executor": "@jscutlery/semver:version",
       "options": {
         "preset": "conventional",
-        "postTargets": ["zu-icon:release:github", "zu-icon:publish"],
+        "postTargets": [
+          "ng-fantasticon:release:github",
+          "ng-fantasticon:publish"
+        ],
         "push": true
       }
     },

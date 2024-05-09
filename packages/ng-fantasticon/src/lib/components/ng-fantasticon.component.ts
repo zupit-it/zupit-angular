@@ -9,11 +9,11 @@ export const CUSTOM_ICONS_ENUM = new InjectionToken<IconsEnum>(
 )
 
 @Component({
-  selector: 'zu-icon',
-  templateUrl: './zupit-icon.component.html',
-  styleUrls: ['./zupit-icon.component.scss']
+  selector: 'ng-fantasticon',
+  templateUrl: './ng-fantasticon.component.html',
+  styleUrls: ['./ng-fantasticon.component.scss']
 })
-export class ZupitIconComponent {
+export class NgFantasticonComponent {
   private _icon: string
   private _iconsNames: string[] = []
 

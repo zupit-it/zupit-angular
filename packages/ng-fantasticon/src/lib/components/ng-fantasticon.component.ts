@@ -8,6 +8,10 @@ export const CUSTOM_ICONS_ENUM = new InjectionToken<IconsEnum>(
   'CUSTOM_ICONS_ENUM'
 )
 
+export const ICONS_NAMES = new InjectionToken<Set<string>>(
+  'ICONS_NAMES_PRIVATE'
+)
+
 @Component({
   selector: 'ng-fantasticon',
   templateUrl: './ng-fantasticon.component.html',
@@ -15,7 +19,6 @@ export const CUSTOM_ICONS_ENUM = new InjectionToken<IconsEnum>(
 })
 export class NgFantasticonComponent {
   private _icon: string
-  private _iconsNames: string[] = []
 
   @Input() set icon(value: string) {
     if (!this.validateIcon(value)) {
@@ -28,23 +31,9 @@ export class NgFantasticonComponent {
     return this._icon
   }
 
+  constructor(@Inject(ICONS_NAMES) private iconsNames: Set<string>) {}
+
   private validateIcon(icon: string): boolean {
-    return this._iconsNames.includes(icon)
-  }
-
-  constructor(@Inject(CUSTOM_ICONS_ENUM) public icons: IconsEnum) {
-    if (!icons) {
-      throw new Error(
-        'CUSTOM_ICONS_ENUM not provided. Please provide the Icons enum.'
-      )
-    }
-
-    if (typeof icons !== 'object') {
-      throw new Error(
-        'CUSTOM_ICONS_ENUM not valid. Please provide a valid Icons enum.'
-      )
-    }
-
-    this._iconsNames = Object.values(icons)
+    return this.iconsNames.has(icon)
   }
 }

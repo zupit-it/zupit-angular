@@ -14,8 +14,9 @@ First you will need to import the `NgFantasticonModule` and to provide your `Ico
 `app.module.ts`:
 
 ```typescript
-import { Icons } from '../path-to-your-icons-enum'
 import { NgFantasticonModule } from '@zupit-it/ng-fantasticon'
+
+import { Icons } from '../path-to-your-icons-enum'
 
 @NgModule({
   imports: [NgFantasticonModule.forRoot(Icons)]

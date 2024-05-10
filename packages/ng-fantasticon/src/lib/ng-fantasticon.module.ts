@@ -1,5 +1,6 @@
-import { ModuleWithProviders, NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { ModuleWithProviders, NgModule } from '@angular/core'
+
 import {
   CUSTOM_ICONS_ENUM,
   ICONS_NAMES,

@@ -18,7 +18,7 @@
       "@zupit-it/ng-auth": ["packages/ng-auth/src/index.ts"],
       "@zupit-it/ng-form": ["packages/ng-form/src/index.ts"],
       "@zupit-it/tools": ["packages/tools/src/index.ts"],
-      "@zupit-it/zu-icon": ["packages/zu-icon/src/index.ts"]
+      "@zupit-it/ng-fantasticon": ["packages/ng-fantasticon/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

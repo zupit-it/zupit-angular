@@ -1,4 +1,4 @@
-export * from './lib/ng-auth.module'
+export * from './lib/ngx-auth.module'
 export * from './lib/interfaces'
 export * from './lib/providers/authentication.provider'
 export * from './lib/providers/storage.provider'

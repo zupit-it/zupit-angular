@@ -8,4 +8,4 @@ import { SubmitDirective } from './directives/submit.directive'
   imports: [CommonModule, ReactiveFormsModule],
   declarations: [FormComponent, SubmitDirective]
 })
-export class NgFormModule {}
+export class NgxFormModule {}

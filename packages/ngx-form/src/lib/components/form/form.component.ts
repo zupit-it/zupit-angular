@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms'
 import { setFormEnabled } from '../../utils/form'
 
 @Component({
-  selector: 'ng-form',
+  selector: 'ngx-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

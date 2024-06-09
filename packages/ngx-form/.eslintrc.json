@@ -17,7 +17,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "ng-form",
+            "prefix": "ngx-form",
             "style": "kebab-case"
           }
         ]

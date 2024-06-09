@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'ng-form',
+  displayName: 'ngx-form',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/packages/ng-form',
+  coverageDirectory: '../../coverage/packages/ngx-form',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

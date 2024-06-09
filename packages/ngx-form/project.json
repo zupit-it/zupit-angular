@@ -1,7 +1,7 @@
 {
-  "name": "ng-form",
+  "name": "ngx-form",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/ng-form/src",
+  "sourceRoot": "packages/ngx-form/src",
   "prefix": "zupit-it",
   "tags": [],
   "projectType": "library",
@@ -10,14 +10,14 @@
       "executor": "@nx/angular:ng-packagr-lite",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "project": "packages/ng-form/ng-package.json"
+        "project": "packages/ngx-form/ng-package.json"
       },
       "configurations": {
         "production": {
-          "tsConfig": "packages/ng-form/tsconfig.lib.prod.json"
+          "tsConfig": "packages/ngx-form/tsconfig.lib.prod.json"
         },
         "development": {
-          "tsConfig": "packages/ng-form/tsconfig.lib.json"
+          "tsConfig": "packages/ngx-form/tsconfig.lib.json"
         }
       },
       "defaultConfiguration": "production"
@@ -27,7 +27,7 @@
       "options": {
         "commands": [
           {
-            "command": "npx nx format:check --projects ng-form"
+            "command": "npx nx format:check --projects ngx-form"
           }
         ],
         "parallel": false
@@ -38,9 +38,9 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "packages/ng-form/**/*.ts",
-          "packages/ng-form/**/*.html",
-          "packages/ng-form/package.json"
+          "packages/ngx-form/**/*.ts",
+          "packages/ngx-form/**/*.html",
+          "packages/ngx-form/package.json"
         ]
       }
     },
@@ -48,7 +48,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/ng-form/jest.config.ts",
+        "jestConfig": "packages/ngx-form/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -62,7 +62,7 @@
       "executor": "@jscutlery/semver:version",
       "options": {
         "preset": "conventional",
-        "postTargets": ["ng-form:release:github", "ng-form:publish"],
+        "postTargets": ["ngx-form:release:github", "ngx-form:publish"],
         "push": true
       }
     },

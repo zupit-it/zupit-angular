@@ -1,4 +1,4 @@
-# ng-form
+# ngx-form
 
 An Angular library to ease the management of Angular Forms.
 
@@ -21,7 +21,7 @@ Feel free to try it out and suggest a feature or contribute yourself if you feel
 ## Installation
 
 ```shell
-npm install -D @zupit-it/ng-form
+npm install -D @zupit-it/ngx-form
 ```
 
 ## Docs

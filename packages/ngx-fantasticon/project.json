@@ -1,7 +1,7 @@
 {
-  "name": "ng-fantasticon",
+  "name": "ngx-fantasticon",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/ng-fantasticon/src",
+  "sourceRoot": "packages/ngx-fantasticon/src",
   "prefix": "zupit-it",
   "tags": [],
   "projectType": "library",
@@ -10,14 +10,14 @@
       "executor": "@nx/angular:ng-packagr-lite",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "project": "packages/ng-fantasticon/ng-package.json"
+        "project": "packages/ngx-fantasticon/ng-package.json"
       },
       "configurations": {
         "production": {
-          "tsConfig": "packages/ng-fantasticon/tsconfig.lib.prod.json"
+          "tsConfig": "packages/ngx-fantasticon/tsconfig.lib.prod.json"
         },
         "development": {
-          "tsConfig": "packages/ng-fantasticon/tsconfig.lib.json"
+          "tsConfig": "packages/ngx-fantasticon/tsconfig.lib.json"
         }
       },
       "defaultConfiguration": "production"
@@ -27,7 +27,7 @@
       "options": {
         "commands": [
           {
-            "command": "npx nx format:check --projects ng-fantasticon"
+            "command": "npx nx format:check --projects ngx-fantasticon"
           }
         ],
         "parallel": false
@@ -38,9 +38,9 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "packages/ng-fantasticon/**/*.ts",
-          "packages/ng-fantasticon/**/*.html",
-          "packages/ng-fantasticon/package.json"
+          "packages/ngx-fantasticon/**/*.ts",
+          "packages/ngx-fantasticon/**/*.html",
+          "packages/ngx-fantasticon/package.json"
         ]
       }
     },
@@ -48,7 +48,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/ng-fantasticon/jest.config.ts",
+        "jestConfig": "packages/ngx-fantasticon/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -63,8 +63,8 @@
       "options": {
         "preset": "conventional",
         "postTargets": [
-          "ng-fantasticon:release:github",
-          "ng-fantasticon:publish"
+          "ngx-fantasticon:release:github",
+          "ngx-fantasticon:publish"
         ],
         "push": true
       }

@@ -4,16 +4,16 @@ import {
   CUSTOM_ICONS_ENUM,
   ICONS_NAMES,
   IconsEnum,
-  NgFantasticonComponent
-} from './components/ng-fantasticon.component'
+  NgxFantasticonComponent
+} from './components/ngx-fantasticon.component'
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [NgFantasticonComponent],
-  exports: [NgFantasticonComponent]
+  declarations: [NgxFantasticonComponent],
+  exports: [NgxFantasticonComponent]
 })
-export class NgFantasticonModule {
-  static forRoot(icons: IconsEnum): ModuleWithProviders<NgFantasticonModule> {
+export class NgxFantasticonModule {
+  static forRoot(icons: IconsEnum): ModuleWithProviders<NgxFantasticonModule> {
     if (!icons) {
       throw new Error(
         'CUSTOM_ICONS_ENUM not provided. Please provide the Icons enum.'
@@ -30,7 +30,7 @@ export class NgFantasticonModule {
     const iconsNames = new Set<string>(iconsArray)
 
     return {
-      ngModule: NgFantasticonModule,
+      ngModule: NgxFantasticonModule,
       providers: [
         { provide: CUSTOM_ICONS_ENUM, useValue: icons },
         { provide: ICONS_NAMES, useValue: iconsNames }

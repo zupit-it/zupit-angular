@@ -13,11 +13,11 @@ export const ICONS_NAMES = new InjectionToken<Set<string>>(
 )
 
 @Component({
-  selector: 'ng-fantasticon',
-  templateUrl: './ng-fantasticon.component.html',
-  styleUrls: ['./ng-fantasticon.component.scss']
+  selector: 'ngx-fantasticon',
+  templateUrl: './ngx-fantasticon.component.html',
+  styleUrls: ['./ngx-fantasticon.component.scss']
 })
-export class NgFantasticonComponent {
+export class NgxFantasticonComponent {
   private _icon: string
 
   @Input() set icon(value: string) {

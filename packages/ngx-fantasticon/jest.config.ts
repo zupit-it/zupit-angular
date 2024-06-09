@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'ng-fantasticon',
+  displayName: 'ngx-fantasticon',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/packages/ng-fantasticon',
+  coverageDirectory: '../../coverage/packages/ngx-fantasticon',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

@@ -5,7 +5,6 @@ module.exports = {
   importOrder: [
     '<THIRD_PARTY_MODULES>',
     '^@(libs/core|libs/feature|libs/ui|libs/util)/(.*)$',
-    '^@(ps|pc|pd|pm|ss)/(.*)$',
     '^[./]'
   ],
   importOrderSeparation: true,

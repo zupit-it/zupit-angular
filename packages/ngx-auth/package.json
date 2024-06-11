@@ -1,0 +1,16 @@
+{
+  "name": "@zupit-it/ngx-auth",
+  "version": "16.2.5",
+  "peerDependencies": {
+    "@angular/common": "^16.0.0",
+    "@angular/core": "^16.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zupit-it/zupit-angular.git"
+  }
+}

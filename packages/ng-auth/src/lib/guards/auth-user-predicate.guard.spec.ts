@@ -1,4 +1,3 @@
-import { AuthUserPredicateGuard } from './auth-user-predicate.guard'
 import {
   ActivatedRouteSnapshot,
   Route,
@@ -7,9 +6,11 @@ import {
   UrlTree
 } from '@angular/router'
 import { EMPTY, Observable, of } from 'rxjs'
-import { AuthenticationService } from '../services/authentication.service'
 import { catchError } from 'rxjs/operators'
+
 import { AuthUserPredicates } from '../interfaces'
+import { AuthenticationService } from '../services/authentication.service'
+import { AuthUserPredicateGuard } from './auth-user-predicate.guard'
 
 describe('AuthUserPredicateGuard', () => {
   let guard: AuthUserPredicateGuard

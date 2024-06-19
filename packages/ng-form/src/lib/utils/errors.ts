@@ -1,5 +1,6 @@
-import { ERROR_EXPECTED_MISSING_VALUE } from '../config'
 import { inject } from '@angular/core'
+
+import { ERROR_EXPECTED_MISSING_VALUE } from '../config'
 
 export class FormException extends Error {
   constructor(public errorCode: string) {

@@ -1,13 +1,11 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http'
 import {
   EnvironmentProviders,
   ModuleWithProviders,
   NgModule,
   Provider
 } from '@angular/core'
-import {
-  AuthenticationProvider,
-  FakeAuthenticationProvider
-} from './providers/authentication.provider'
+
 import {
   AUTHENTICATION_HEADER,
   AUTO_LOGIN,
@@ -20,17 +18,20 @@ import {
   TOKEN_TYPE,
   UNAUTHORIZED_URL_BLACKLIST
 } from './config'
-import { AuthenticationService } from './services/authentication.service'
+import { IsAuthDirective } from './directives/is-auth.directive'
+import { UserHasDirective } from './directives/user-has.directive'
+import { UserDirective } from './directives/user.directive'
+import { AuthExpiredInterceptor } from './interceptors/auth-expired.interceptor'
+import { AuthInterceptor } from './interceptors/auth.interceptor'
+import {
+  AuthenticationProvider,
+  FakeAuthenticationProvider
+} from './providers/authentication.provider'
 import {
   MemoryStorageProvider,
   StorageProvider
 } from './providers/storage.provider'
-import { AuthInterceptor } from './interceptors/auth.interceptor'
-import { HTTP_INTERCEPTORS } from '@angular/common/http'
-import { AuthExpiredInterceptor } from './interceptors/auth-expired.interceptor'
-import { UserHasDirective } from './directives/user-has.directive'
-import { IsAuthDirective } from './directives/is-auth.directive'
-import { UserDirective } from './directives/user.directive'
+import { AuthenticationService } from './services/authentication.service'
 import { NgxAuthService } from './services/ngx-auth.service'
 
 export interface NgxAuthUtilsConfig {

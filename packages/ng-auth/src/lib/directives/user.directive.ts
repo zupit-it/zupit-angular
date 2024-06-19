@@ -1,7 +1,8 @@
 import { Directive, OnDestroy, OnInit } from '@angular/core'
 import { Subscription } from 'rxjs'
-import { AuthenticationService } from '../services/authentication.service'
+
 import { UserType } from '../interfaces'
+import { AuthenticationService } from '../services/authentication.service'
 
 @Directive({
   selector: '[ngAuthUser]',

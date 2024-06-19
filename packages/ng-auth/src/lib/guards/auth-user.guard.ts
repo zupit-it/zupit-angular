@@ -6,10 +6,11 @@ import {
   RouterStateSnapshot,
   UrlTree
 } from '@angular/router'
-import { map, take } from 'rxjs/operators'
-import { AuthenticationService } from '../services/authentication.service'
-import { NO_AUTH_REDIRECT_URL } from '../config'
 import { Observable } from 'rxjs'
+import { map, take } from 'rxjs/operators'
+
+import { NO_AUTH_REDIRECT_URL } from '../config'
+import { AuthenticationService } from '../services/authentication.service'
 
 @Injectable({
   providedIn: 'root'

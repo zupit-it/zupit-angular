@@ -6,6 +6,7 @@ import {
   ViewContainerRef
 } from '@angular/core'
 import { Subscription } from 'rxjs'
+
 import { UserType } from '../interfaces'
 import { NgxAuthService } from '../services/ngx-auth.service'
 

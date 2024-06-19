@@ -5,6 +5,7 @@ import {
   UrlTree
 } from '@angular/router'
 import { Observable, of } from 'rxjs'
+
 import { AuthenticationService } from '../services/authentication.service'
 import { AuthUserGuard } from './auth-user.guard'
 

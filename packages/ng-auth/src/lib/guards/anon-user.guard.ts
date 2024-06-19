@@ -5,10 +5,11 @@ import {
   RouterStateSnapshot,
   UrlTree
 } from '@angular/router'
-import { map } from 'rxjs/operators'
-import { AuthenticationService } from '../services/authentication.service'
-import { HOME_URL } from '../config'
 import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
+
+import { HOME_URL } from '../config'
+import { AuthenticationService } from '../services/authentication.service'
 
 @Injectable({
   providedIn: 'root'

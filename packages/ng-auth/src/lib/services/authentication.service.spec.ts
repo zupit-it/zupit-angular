@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing'
 import { EMPTY, of, throwError } from 'rxjs'
 import { catchError, concatMap } from 'rxjs/operators'
+
+import { AUTO_LOGIN, STORAGE_KEY_PREFIX } from '../config'
 import { AuthenticationProvider } from '../providers/authentication.provider'
 import {
   MemoryStorageProvider,
   StorageProvider
 } from '../providers/storage.provider'
-
 import { AuthenticationService } from './authentication.service'
-import { AUTO_LOGIN, STORAGE_KEY_PREFIX } from '../config'
 
 describe('AuthenticationService', () => {
   const storagePrefix = 'ngx-auth-test'

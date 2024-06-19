@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { FormComponent } from './form.component'
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
+
+import { FormComponent } from './form.component'
 
 describe('FormComponent', () => {
   const fb: FormBuilder = new FormBuilder()

@@ -135,7 +135,7 @@ npm install --save @zupit-it/ng-auth
      }
 
      /**
-          Mandatory: Fetch the user identity 
+          Mandatory: Fetch the user identity
         */
      fetchUser(): Observable<MyUserType> {
        return this.myService.getUser()

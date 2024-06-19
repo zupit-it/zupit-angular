@@ -5,9 +5,10 @@ import {
   TemplateRef,
   ViewContainerRef
 } from '@angular/core'
-import { AuthConditionalDirective } from './auth-conditional.directive'
+
 import { UserType } from '../interfaces'
 import { NgxAuthService } from '../services/ngx-auth.service'
+import { AuthConditionalDirective } from './auth-conditional.directive'
 
 @Directive({
   selector: '[ngAuth]'

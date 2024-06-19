@@ -9,13 +9,14 @@ import { Inject, Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { BehaviorSubject, Observable, throwError } from 'rxjs'
 import { catchError, filter, switchMap, take } from 'rxjs/operators'
-import { AuthenticationService } from '../services/authentication.service'
-import { StorageProvider } from '../providers/storage.provider'
+
 import {
   REFRESH_TOKEN,
   SESSION_EXPIRED_REDIRECT_URL,
   UNAUTHORIZED_URL_BLACKLIST
 } from '../config'
+import { StorageProvider } from '../providers/storage.provider'
+import { AuthenticationService } from '../services/authentication.service'
 
 @Injectable()
 export class AuthExpiredInterceptor implements HttpInterceptor {

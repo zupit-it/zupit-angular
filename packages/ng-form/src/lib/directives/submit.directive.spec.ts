@@ -1,5 +1,6 @@
-import { SubmitDirective } from './submit.directive'
 import { FormBuilder, Validators } from '@angular/forms'
+
+import { SubmitDirective } from './submit.directive'
 
 describe('SubmitDirective', () => {
   const fb: FormBuilder = new FormBuilder()

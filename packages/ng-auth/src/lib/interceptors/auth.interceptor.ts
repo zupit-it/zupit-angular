@@ -1,11 +1,12 @@
-import { Inject, Injectable } from '@angular/core'
 import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest
 } from '@angular/common/http'
+import { Inject, Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
+
 import { AUTHENTICATION_HEADER, TOKEN_TYPE } from '../config'
 import { AuthenticationService } from '../services/authentication.service'
 

@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing'
 import { EMPTY, of } from 'rxjs'
 import { catchError } from 'rxjs/operators'
+
+import { AUTO_LOGIN, STORAGE_KEY_PREFIX } from '../config'
+import { AccessTokenModel } from '../interfaces'
 import { AuthenticationProvider } from '../providers/authentication.provider'
 import {
   DynamicStorageProvider,
   StorageProvider
 } from '../providers/storage.provider'
-
 import { AuthenticationService } from './authentication.service'
-import { AccessTokenModel } from '../interfaces'
-import { AUTO_LOGIN, STORAGE_KEY_PREFIX } from '../config'
 
 describe('AuthenticationServiceWithDynamicStorage', () => {
   let service: AuthenticationService

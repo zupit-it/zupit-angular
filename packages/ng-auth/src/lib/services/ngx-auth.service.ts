@@ -1,7 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core'
-import { AuthenticationService } from './authentication.service'
 import { Observable, Subscription } from 'rxjs'
-import { AuthenticationEvent, AuthUserSnapshot, UserType } from '../interfaces'
+
+import { AuthUserSnapshot, AuthenticationEvent, UserType } from '../interfaces'
+import { AuthenticationService } from './authentication.service'
 
 @Injectable({
   providedIn: 'root'

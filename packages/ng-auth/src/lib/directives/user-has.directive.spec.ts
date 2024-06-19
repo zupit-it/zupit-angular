@@ -1,10 +1,11 @@
-import { UserHasDirective } from './user-has.directive'
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { AuthenticationService } from '../services/authentication.service'
 import { BehaviorSubject } from 'rxjs'
+
 import { UserType } from '../interfaces'
+import { AuthenticationService } from '../services/authentication.service'
 import { NgxAuthService } from '../services/ngx-auth.service'
+import { UserHasDirective } from './user-has.directive'
 
 @Component({
   template: `

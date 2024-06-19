@@ -1,4 +1,10 @@
-import { Observable, of, ReplaySubject, Subject, throwError } from 'rxjs'
+import { Inject, Injectable } from '@angular/core'
+import {
+  ActivatedRouteSnapshot,
+  Route,
+  RouterStateSnapshot
+} from '@angular/router'
+import { Observable, ReplaySubject, Subject, of, throwError } from 'rxjs'
 import {
   catchError,
   concatMap,
@@ -7,19 +13,14 @@ import {
   take,
   tap
 } from 'rxjs/operators'
+
+import { AUTO_LOGIN, STORAGE_KEY_PREFIX } from '../config'
+import { AccessTokenModel, AuthenticationEvent, UserType } from '../interfaces'
 import { AuthenticationProvider } from '../providers/authentication.provider'
-import { Inject, Injectable } from '@angular/core'
 import {
   DynamicStorageProvider,
   StorageProvider
 } from '../providers/storage.provider'
-import { AccessTokenModel, AuthenticationEvent, UserType } from '../interfaces'
-import {
-  ActivatedRouteSnapshot,
-  Route,
-  RouterStateSnapshot
-} from '@angular/router'
-import { AUTO_LOGIN, STORAGE_KEY_PREFIX } from '../config'
 
 @Injectable({
   providedIn: 'root'

@@ -5,10 +5,11 @@ import {
   TemplateRef,
   ViewContainerRef
 } from '@angular/core'
-import { AuthConditionalDirective } from './auth-conditional.directive'
-import { UserConditions } from '../utils/user-conditions'
+
 import { AuthUserType, Condition, UserType } from '../interfaces'
 import { NgxAuthService } from '../services/ngx-auth.service'
+import { UserConditions } from '../utils/user-conditions'
+import { AuthConditionalDirective } from './auth-conditional.directive'
 
 @Directive({
   selector: '[ngAuthHas]'

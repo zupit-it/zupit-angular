@@ -1,10 +1,11 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { AuthenticationService } from '../services/authentication.service'
 import { BehaviorSubject } from 'rxjs'
-import { IsAuthDirective } from './is-auth.directive'
+
 import { UserType } from '../interfaces'
+import { AuthenticationService } from '../services/authentication.service'
 import { NgxAuthService } from '../services/ngx-auth.service'
+import { IsAuthDirective } from './is-auth.directive'
 
 @Component({
   template: `

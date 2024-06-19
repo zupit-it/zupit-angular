@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing'
-
-import { UserResolver } from './user.resolver'
-import { AuthenticationService } from '../services/authentication.service'
 import { BehaviorSubject } from 'rxjs'
+
 import { UserType } from '../interfaces'
+import { AuthenticationService } from '../services/authentication.service'
+import { UserResolver } from './user.resolver'
 
 describe('UserResolver', () => {
   let resolver: UserResolver

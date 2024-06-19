@@ -7,6 +7,7 @@ import {
   updateJson
 } from '@nx/devkit'
 import { simpleGit } from 'simple-git'
+
 import { LibraryGeneratorSchema } from './schema'
 
 export default async function (tree: Tree, schema: LibraryGeneratorSchema) {

@@ -8,11 +8,12 @@ import {
   UrlTree
 } from '@angular/router'
 import { Observable } from 'rxjs'
-import { AuthenticationService } from '../services/authentication.service'
 import { map, take } from 'rxjs/operators'
-import { UserConditions } from '../utils/user-conditions'
-import { AuthUserPredicates } from '../interfaces'
+
 import { GLOBAL_USER_CONDITION_REDIRECT_URL } from '../config'
+import { AuthUserPredicates } from '../interfaces'
+import { AuthenticationService } from '../services/authentication.service'
+import { UserConditions } from '../utils/user-conditions'
 
 @Injectable({
   providedIn: 'root'

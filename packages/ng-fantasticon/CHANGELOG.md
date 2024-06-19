@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.2](https://github.com/zupit-it/zupit-angular/compare/ng-fantasticon-0.1.1...ng-fantasticon-0.1.2) (2024-06-19)
+
+
+### Bug Fixes
+
+* fix angular version for ng-fantasticon ([7b88823](https://github.com/zupit-it/zupit-angular/commit/7b88823de6223db017a31dbfcf304774ff3b7689))
+
 ## [0.1.1](https://github.com/zupit-it/zupit-angular/compare/ng-fantasticon-0.1.0...ng-fantasticon-0.1.1) (2024-06-10)
 
 
